@@ -1,0 +1,77 @@
+plugins {
+    id(Plugins.androidApp)
+    id(Plugins.kotlin)
+}
+
+android {
+    compileSdk = Config.compileSdk
+
+    defaultConfig {
+        applicationId = Config.appId
+        minSdk = Config.minSdk
+        targetSdk = Config.targetSdk
+        versionCode = VersionConfig.versionCode
+        versionName = VersionConfig.versionName
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0-alpha08"
+    }
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+}
+
+dependencies {
+    // AndroidX
+    implementation(AndroidX.coreKtx)
+    implementation(AndroidX.lifecycle)
+
+    // Compose
+    implementation(Compose.composeActivity)
+    implementation(Compose.composeUI)
+    implementation(Compose.composeMaterial)
+    implementation(Compose.composeToolingPreview)
+    debugImplementation(Compose.composeTooling)
+    debugImplementation(Compose.composeTestManifest)
+
+    // Timber Logging
+    implementation(Log.timber)
+
+    // Testing
+    testImplementation(Test.jUnit)
+    androidTestImplementation(Test.jUnitExt)
+    androidTestImplementation(Test.espresso)
+    androidTestImplementation(Compose.composeUITest)
+}

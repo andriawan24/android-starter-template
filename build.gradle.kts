@@ -4,14 +4,17 @@ plugins {
     id(Plugins.androidApp) version PluginVersions.androidApp apply false
     id(Plugins.library) version PluginVersions.library apply false
     id(Plugins.kotlin) version PluginVersions.kotlin apply false
-    id("io.gitlab.arturbosch.detekt") version "1.20.0" apply true
+    id(Plugins.detekt) version PluginVersions.detekt apply true
 }
 
 subprojects {
-    apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(plugin = Plugins.detekt)
+
     detekt {
+        toolVersion = PluginVersions.detekt
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
+
     tasks.withType<Detekt>().configureEach {
         reports {
             xml.required.set(true)

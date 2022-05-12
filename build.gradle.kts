@@ -4,7 +4,8 @@ plugins {
     id(Plugins.androidApp) version PluginVersions.androidApp apply false
     id(Plugins.library) version PluginVersions.library apply false
     id(Plugins.kotlin) version PluginVersions.kotlin apply false
-    id(Plugins.detekt) version PluginVersions.detekt apply true
+    id(Plugins.hilt) version PluginVersions.hilt apply false
+    id(Plugins.detekt) version PluginVersions.detekt
 }
 
 subprojects {

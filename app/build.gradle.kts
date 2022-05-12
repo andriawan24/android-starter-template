@@ -1,6 +1,8 @@
 plugins {
     id(Plugins.androidApp)
     id(Plugins.kotlin)
+    id(Plugins.hilt)
+    id("kotlin-kapt")
 }
 
 android {
@@ -69,9 +71,23 @@ dependencies {
     // Timber Logging
     implementation(Log.timber)
 
-    // Testing
+    // Hilt
+    implementation(Hilt.hiltAndroid)
+    kapt(Hilt.hiltCompiler)
+
+    // Local Testing
     testImplementation(Test.jUnit)
+    testImplementation(Hilt.hiltAndroidTesting)
+    kaptTest(Hilt.hiltCompiler)
+
+    // Instrumentation Testing
     androidTestImplementation(Test.jUnitExt)
     androidTestImplementation(Test.espresso)
     androidTestImplementation(Compose.composeUITest)
+    androidTestImplementation(Hilt.hiltAndroidTesting)
+    kaptAndroidTest(Hilt.hiltCompiler)
+}
+
+kapt {
+    correctErrorTypes = true
 }

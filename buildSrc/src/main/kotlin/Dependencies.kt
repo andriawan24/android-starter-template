@@ -34,3 +34,11 @@ object Test {
     const val jUnitExt = "androidx.test.ext:junit:$jUnitExtVersion:"
     const val espresso = "androidx.test.espresso:espresso-core:$espressoVersion"
 }
+
+object Hilt {
+    private const val hiltVersion = "2.42"
+
+    const val hiltAndroid = "com.google.dagger:hilt-android:$hiltVersion"
+    const val hiltCompiler = "com.google.dagger:hilt-compiler:$hiltVersion"
+    const val hiltAndroidTesting = "com.google.dagger:hilt-android-testing:$hiltVersion"
+}

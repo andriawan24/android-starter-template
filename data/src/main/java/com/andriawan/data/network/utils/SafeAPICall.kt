@@ -6,17 +6,14 @@ import java.io.IOException
 
 suspend fun <T: Any> safeApiCall(call: suspend () -> Response<T>): T? {
     val response = call.invoke()
-    try {
+    return try {
         if (response.isSuccessful) {
-            return response.body()
+            response.body()
         } else {
             throw ApiException(response.message())
         }
     } catch (e: IOException) {
         Timber.e(e)
-        throw NetworkException(e.message.toString())
-    } catch (e: Exception) {
-        Timber.e(e)
-        throw ApiException(e.message.toString())
+        null
     }
 }

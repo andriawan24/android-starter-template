@@ -1,11 +1,10 @@
 package com.andriawan.data.di
 
-import android.content.Context
+import com.andriawan.common.Constants
 import com.andriawan.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,9 +21,9 @@ object NetworkModule {
     @Singleton
     fun providesClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+            .connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }

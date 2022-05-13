@@ -1,10 +1,9 @@
 package com.andriawan.data.network
 
-import com.andriawan.data.network.model.GamesResponse
+import com.andriawan.data.network.models.GamesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 interface ApiService {
 

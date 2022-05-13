@@ -1,4 +1,4 @@
-package com.andriawan.data.network.model
+package com.andriawan.data.network.models
 
 data class RatingDTO(
     val id: Int?,

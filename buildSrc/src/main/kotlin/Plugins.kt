@@ -1,15 +1,17 @@
 object Plugins {
-    const val androidApp = "com.android.application"
-    const val kotlin = "org.jetbrains.kotlin.android"
-    const val library = "com.android.library"
-    const val detekt = "io.gitlab.arturbosch.detekt"
-    const val hilt = "com.google.dagger.hilt.android"
+    const val ANDROID_APP = "com.android.application"
+    const val KOTLIN = "org.jetbrains.kotlin.android"
+    const val LIBRARY= "com.android.library"
+    const val DETEKT = "io.gitlab.arturbosch.detekt"
+    const val HILT = "dagger.hilt.android.plugin"
+    const val KOTLIN_KAPT = "kotlin-kapt"
+    const val KOTLIN_ANDROID = "kotlin-android"
 }
 
 object PluginVersions {
-    const val androidApp = "7.2.0"
-    const val kotlin = "1.6.20"
-    const val library = "7.2.0"
-    const val detekt = "1.20.0"
-    const val hilt = "2.42"
+    const val ANDROID_APP = "7.1.3"
+    const val KOTLIN = "1.6.10"
+    const val LIBRARY = "7.2.0"
+    const val DETEKT = "1.20.0"
+    const val HILT = "2.38.1"
 }

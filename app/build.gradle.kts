@@ -1,21 +1,21 @@
 plugins {
-    id(Plugins.androidApp)
-    id(Plugins.kotlin)
-    id(Plugins.hilt)
-    id("kotlin-kapt")
+    id(Plugins.ANDROID_APP)
+    id(Plugins.KOTLIN_ANDROID)
+    id(Plugins.KOTLIN_KAPT)
+    id(Plugins.HILT)
 }
 
 android {
-    compileSdk = Config.compileSdk
+    compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        applicationId = Config.appId
-        minSdk = Config.minSdk
-        targetSdk = Config.targetSdk
-        versionCode = VersionConfig.versionCode
-        versionName = VersionConfig.versionName
+        applicationId = Config.APP_ID
+        minSdk = Config.MIN_SDK
+        targetSdk = Config.TARGET_SDK
+        versionCode = VersionConfig.VERSION_CODE
+        versionName = VersionConfig.VERSION_NAME
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Config.TEST_INSTRUMENTATION_RUNNER
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -45,7 +45,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0-alpha08"
+        kotlinCompilerExtensionVersion = "1.1.1"
     }
 
     packagingOptions {
@@ -56,36 +56,48 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":common"))
+
     // AndroidX
-    implementation(AndroidX.coreKtx)
-    implementation(AndroidX.lifecycle)
+    implementation(AndroidX.CORE_KTX)
+    implementation(AndroidX.LIFECYCLE)
+    implementation(AndroidX.LIFECYCLE_VIEW_MODEL)
+
+    // Retrofit
+    implementation(Retrofit.RETROFIT)
+    implementation(Retrofit.GSON_CONVERTER)
+
+    // OKHTTP3 Logging
+    implementation(OKHttp3.LOGGING_INTERCEPTOR)
 
     // Compose
-    implementation(Compose.composeActivity)
-    implementation(Compose.composeUI)
-    implementation(Compose.composeMaterial)
-    implementation(Compose.composeToolingPreview)
-    debugImplementation(Compose.composeTooling)
-    debugImplementation(Compose.composeTestManifest)
+    implementation(Compose.COMPOSE_ACTIVITY)
+    implementation(Compose.COMPOSE_UI)
+    implementation(Compose.COMPOSE_MATERIAL)
+    implementation(Compose.COMPOSE_TOOLING_PREVIEW)
+    debugImplementation(Compose.COMPOSE_TOOLING)
+    debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
 
     // Timber Logging
-    implementation(Log.timber)
+    implementation(Log.TIMBER)
 
     // Hilt
-    implementation(Hilt.hiltAndroid)
-    kapt(Hilt.hiltCompiler)
+    implementation(Hilt.HILT_ANDROID)
+    kapt(Hilt.HILT_COMPILER)
 
     // Local Testing
-    testImplementation(Test.jUnit)
-    testImplementation(Hilt.hiltAndroidTesting)
-    kaptTest(Hilt.hiltCompiler)
+    testImplementation(Test.JUNIT)
+    testImplementation(Hilt.HILT_ANDROID_TESTING)
+    kaptTest(Hilt.HILT_COMPILER)
 
     // Instrumentation Testing
-    androidTestImplementation(Test.jUnitExt)
-    androidTestImplementation(Test.espresso)
-    androidTestImplementation(Compose.composeUITest)
-    androidTestImplementation(Hilt.hiltAndroidTesting)
-    kaptAndroidTest(Hilt.hiltCompiler)
+    androidTestImplementation(Test.JUNIT_EXT)
+    androidTestImplementation(Test.ESPRESSO)
+    androidTestImplementation(Compose.COMPOSE_UI_TEST)
+    androidTestImplementation(Hilt.HILT_ANDROID_TESTING)
+    kaptAndroidTest(Hilt.HILT_COMPILER)
 }
 
 kapt {

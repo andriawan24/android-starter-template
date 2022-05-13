@@ -1,18 +1,17 @@
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
-    id(Plugins.androidApp) version PluginVersions.androidApp apply false
-    id(Plugins.library) version PluginVersions.library apply false
-    id(Plugins.kotlin) version PluginVersions.kotlin apply false
-    id(Plugins.hilt) version PluginVersions.hilt apply false
-    id(Plugins.detekt) version PluginVersions.detekt
+    id(Plugins.ANDROID_APP) version PluginVersions.ANDROID_APP apply false
+    id(Plugins.LIBRARY) version PluginVersions.LIBRARY apply false
+    id(Plugins.KOTLIN) version PluginVersions.KOTLIN apply false
+    id(Plugins.DETEKT) version PluginVersions.DETEKT
 }
 
 subprojects {
-    apply(plugin = Plugins.detekt)
+    apply(plugin = Plugins.DETEKT)
 
     detekt {
-        toolVersion = PluginVersions.detekt
+        toolVersion = PluginVersions.DETEKT
         config = files("${project.rootDir}/config/detekt/detekt.yml")
     }
 

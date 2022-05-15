@@ -2,8 +2,8 @@ package com.andriawan.data.repository
 
 import com.andriawan.data.network.ApiService
 import com.andriawan.data.network.mappers.toDomain
-import com.andriawan.data.network.model.GamesDTO
-import com.andriawan.data.network.model.GamesResponse
+import com.andriawan.data.network.models.GamesDTO
+import com.andriawan.data.network.models.GamesResponse
 import com.andriawan.domain.models.Games
 import io.mockk.coEvery
 import io.mockk.every
@@ -19,9 +19,6 @@ import kotlin.random.Random
 class GamesRepositoryImplTest {
 
     private val apiService: ApiService = mockk()
-    private val gamesRepositoryImpl = GamesRepositoryImpl(
-        apiService
-    )
 
     @Test
     fun getAllGames() = runBlocking {

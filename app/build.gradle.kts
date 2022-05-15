@@ -22,8 +22,20 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -45,7 +57,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
+        kotlinCompilerExtensionVersion = Compose.COMPOSE_VERSION
     }
 
     packagingOptions {
@@ -59,6 +71,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":common"))
+    implementation(project(":common-ui"))
 
     // AndroidX
     implementation(AndroidX.CORE_KTX)
@@ -77,6 +90,9 @@ dependencies {
     implementation(Compose.COMPOSE_UI)
     implementation(Compose.COMPOSE_MATERIAL)
     implementation(Compose.COMPOSE_TOOLING_PREVIEW)
+    implementation(Compose.COMPOSE_LIFECYCLE)
+    implementation(Compose.COMPOSE_NAVIGATION)
+    implementation(Compose.COMPOSE_HILT)
     debugImplementation(Compose.COMPOSE_TOOLING)
     debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
 

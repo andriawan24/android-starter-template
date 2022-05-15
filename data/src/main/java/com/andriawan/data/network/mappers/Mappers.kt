@@ -1,6 +1,6 @@
 package com.andriawan.data.network.mappers
 
-import com.andriawan.data.network.model.*
+import com.andriawan.data.network.models.*
 import com.andriawan.domain.models.*
 
 fun GamesResponse.toDomain(): List<Games>? {

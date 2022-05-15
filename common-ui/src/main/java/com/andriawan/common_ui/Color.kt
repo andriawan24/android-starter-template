@@ -1,4 +1,4 @@
-package com.andriawan.template.ui.theme
+package com.andriawan.common_ui
 
 import androidx.compose.ui.graphics.Color
 

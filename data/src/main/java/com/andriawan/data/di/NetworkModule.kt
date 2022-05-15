@@ -2,6 +2,8 @@ package com.andriawan.data.di
 
 import com.andriawan.common.Constants
 import com.andriawan.data.network.ApiService
+import com.andriawan.common.error.ErrorHandleImpl
+import com.andriawan.common.error.ErrorHandler
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,5 +48,11 @@ object NetworkModule {
         retrofit: Retrofit
     ): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providesErrorHandler(): ErrorHandler {
+        return ErrorHandleImpl()
     }
 }

@@ -21,8 +21,10 @@ object OKHttp3 {
 }
 
 object Compose {
-    private const val COMPOSE_VERSION = "1.1.1"
+    const val COMPOSE_VERSION = "1.1.1"
     private const val COMPOSE_ACTIVITY_VERSION = "1.4.0"
+    private const val NAV_VERSION = "2.4.2"
+    private const val HILT_NAVIGATION_VERSION = "1.0.0"
 
     const val COMPOSE_UI = "androidx.compose.ui:ui:$COMPOSE_VERSION"
     const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:$COMPOSE_ACTIVITY_VERSION"
@@ -31,6 +33,9 @@ object Compose {
     const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:$COMPOSE_VERSION"
     const val COMPOSE_TEST_MANIFEST = "androidx.compose.ui:ui-test-manifest:$COMPOSE_VERSION"
     const val COMPOSE_UI_TEST = "androidx.compose.ui:ui-test-junit4:$COMPOSE_VERSION"
+    const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:$NAV_VERSION"
+    const val COMPOSE_LIFECYCLE = "androidx.compose.runtime:runtime-livedata:$COMPOSE_VERSION"
+    const val COMPOSE_HILT = "androidx.hilt:hilt-navigation-compose:$HILT_NAVIGATION_VERSION"
 }
 
 object Log {

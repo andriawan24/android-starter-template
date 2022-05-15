@@ -1,11 +1,11 @@
 package com.andriawan.common
 
-sealed class Resource<T>(
-    data: T? = null,
-    message: String? = null
-) {
+import androidx.annotation.Keep
+import com.andriawan.common.error.ErrorEntity
 
-    class Success<T>(data: T?): Resource<T>(data, null)
-    class Loading: Resource<None>()
-    class Error(message: String?): Resource<None>(message = message)
+@Keep
+sealed class Resource<out T> {
+    object Loading: Resource<Nothing>()
+    data class Success<T>(val data: T? = null): Resource<T>()
+    data class Error(val error: ErrorEntity): Resource<Nothing>()
 }

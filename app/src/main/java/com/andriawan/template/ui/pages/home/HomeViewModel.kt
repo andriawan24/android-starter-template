@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
 
                     is Resource.Error -> {
                         _gameList.value = HomeState(
-                            errorMessage = it.message
+                            errorMessage = it.error.originalException.message
                         )
                     }
                 }

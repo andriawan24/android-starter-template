@@ -103,6 +103,9 @@ dependencies {
     implementation(Hilt.HILT_ANDROID)
     kapt(Hilt.HILT_COMPILER)
 
+    // Coil KT
+    implementation(Coil.COIL_KT)
+
     // Local Testing
     testImplementation(Test.JUNIT)
     testImplementation(Hilt.HILT_ANDROID_TESTING)

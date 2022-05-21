@@ -8,7 +8,7 @@ import com.andriawan.common.Resource
 import com.andriawan.domain.use_cases.GetGameUseCaseParam
 import com.andriawan.domain.use_cases.GetGamesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
     private fun getData() {
         viewModelScope.launch {
             val param = GetGameUseCaseParam()
-            getGamesUseCase.execute(param).collect {
+            getGamesUseCase.execute(param).collectLatest {
                 when (it) {
                     Resource.Loading -> {
                         _gameList.value = HomeState(isLoading = true)

@@ -44,6 +44,12 @@ object Log {
     const val TIMBER = "com.jakewharton.timber:timber:$VERSION"
 }
 
+object Coil {
+    private const val COIL_VERSION = "2.1.0"
+
+    const val COIL_KT = "io.coil-kt:coil-compose:$COIL_VERSION"
+}
+
 object Hilt {
     private const val VERSION = "2.38.1"
 
@@ -58,6 +64,6 @@ object Test {
     private const val ESPRESSO_VERSION = "3.4.0"
 
     const val JUNIT = "junit:junit:$JUNIT_VERSION"
-    const val JUNIT_EXT = "androidx.test.ext:junit:$JUNIT_EXT_VERSION:"
+    const val JUNIT_EXT = "androidx.test.ext:junit:$JUNIT_EXT_VERSION"
     const val ESPRESSO = "androidx.test.espresso:espresso-core:$ESPRESSO_VERSION"
 }

@@ -9,5 +9,6 @@ val Teal200 = Color(0xFF03DAC5)
 val DarkBackground = Color(0xFF081131)
 val CardColor = Color(0xFF0E1839)
 val CardStrokeColor = Color(0xFF162044)
+val FloatingButtonColor = Color(0xFFFEAFCB)
 val SubtitleColor = Color(0xFF7E8BB6)
-
+val UnselectedBottomNavColor = Color(0xFF4B5782)

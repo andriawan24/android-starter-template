@@ -30,9 +30,11 @@ fun HomeScreen(
                 imageProfile = "https://dummyimage.com/500x500/000/fff",
                 haveNotification = false
             )
+
             ContentTitled(title = "Category", textPadding = 18.dp) {
                 CategoryCardList(categories = categoryList)
             }
+
             ContentTitled(
                 title = "Featured Games",
                 textPadding = 18.dp,

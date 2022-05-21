@@ -19,10 +19,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.andriawan.common.R
 import com.andriawan.common_ui.CardColor
 import com.andriawan.common_ui.CardStrokeColor
 import com.andriawan.common_ui.TemplateTheme
-import com.andriawan.template.R
 
 @ExperimentalFoundationApi
 @Composable

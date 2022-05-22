@@ -13,5 +13,5 @@ Still working on it, please be patience
 - [x] Setup multi-module
 - [x] Migrate to Kotlin DSL Gradle
 - [x] Setup Dependency Injection
-- [ ] Secured BASE URL
-- [ ] Secured token API
+- [x] Secured BASE URL
+- [x] Secured token API

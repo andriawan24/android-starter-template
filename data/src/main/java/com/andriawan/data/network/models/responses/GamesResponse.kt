@@ -1,4 +1,6 @@
-package com.andriawan.data.network.models
+package com.andriawan.data.network.models.responses
+
+import com.andriawan.data.network.models.GamesDTO
 
 data class GamesResponse(
     val count: Int?,

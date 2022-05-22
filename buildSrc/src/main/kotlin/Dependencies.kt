@@ -38,10 +38,25 @@ object Compose {
     const val COMPOSE_HILT = "androidx.hilt:hilt-navigation-compose:$HILT_NAVIGATION_VERSION"
 }
 
+object Room {
+    private const val ROOM_VERSION = "2.4.2"
+
+    const val RUNTIME = "androidx.room:room-runtime:$ROOM_VERSION"
+    const val COMPILER = "androidx.room:room-compiler:$ROOM_VERSION"
+    const val ROOM_KTX = "androidx.room:room-ktx:$ROOM_VERSION"
+    const val ROOM_TESTING = "androidx.room:room-testing:$ROOM_VERSION"
+}
+
 object Log {
     private const val VERSION = "5.0.1"
 
     const val TIMBER = "com.jakewharton.timber:timber:$VERSION"
+}
+
+object Coil {
+    private const val COIL_VERSION = "2.1.0"
+
+    const val COIL_KT = "io.coil-kt:coil-compose:$COIL_VERSION"
 }
 
 object Hilt {
@@ -58,6 +73,6 @@ object Test {
     private const val ESPRESSO_VERSION = "3.4.0"
 
     const val JUNIT = "junit:junit:$JUNIT_VERSION"
-    const val JUNIT_EXT = "androidx.test.ext:junit:$JUNIT_EXT_VERSION:"
+    const val JUNIT_EXT = "androidx.test.ext:junit:$JUNIT_EXT_VERSION"
     const val ESPRESSO = "androidx.test.espresso:espresso-core:$ESPRESSO_VERSION"
 }

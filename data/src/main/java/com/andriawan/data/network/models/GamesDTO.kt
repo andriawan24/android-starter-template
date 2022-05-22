@@ -6,7 +6,7 @@ data class GamesDTO(
     val community_rating: Int?,
     val dominant_color: String?,
     val genres: List<GenreDTO?>?,
-    val id: Int?,
+    val id: Int,
     val name: String?,
     val playtime: Int?,
     val rating: Double?,
@@ -21,4 +21,9 @@ data class GamesDTO(
     val tags: List<TagDTO?>?,
     val tba: Boolean?,
     val updated: String?,
+
+    // Detail game
+    val description: String? = null,
+    val description_raw: String? = null,
+    val saturated_color: String? = null,
 )

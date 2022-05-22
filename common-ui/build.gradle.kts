@@ -49,7 +49,6 @@ android {
 }
 
 dependencies {
-
     // AndroidX
     implementation(AndroidX.CORE_KTX)
     implementation(AndroidX.LIFECYCLE)

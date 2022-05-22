@@ -17,12 +17,10 @@ class GetGamesUseCaseImpl(
     private val gamesRepository: GamesRepository,
     private val errorHandler: ErrorHandler
 ) : GetGamesUseCase {
-
     override fun execute(params: GetGamesParam): Flow<Resource<List<Games>>> = flow {
         emit(Resource.Loading)
         try {
             val gameList = gamesRepository.getAllGames(
-                key = params.key,
                 page = params.page,
                 ordering = params.ordering
             )

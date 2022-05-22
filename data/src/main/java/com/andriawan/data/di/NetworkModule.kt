@@ -4,6 +4,8 @@ import com.andriawan.common.Constants
 import com.andriawan.data.network.ApiService
 import com.andriawan.common.error.ErrorHandleImpl
 import com.andriawan.common.error.ErrorHandler
+import com.andriawan.data.BuildConfig
+import com.andriawan.data.network.util.TokenApiInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +29,7 @@ object NetworkModule {
             .readTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(TokenApiInterceptor(BuildConfig.TOKEN_API))
             .build()
     }
 
@@ -36,7 +39,7 @@ object NetworkModule {
         client: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.rawg.io/api/")
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

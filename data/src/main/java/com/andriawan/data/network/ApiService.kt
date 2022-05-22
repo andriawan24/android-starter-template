@@ -11,7 +11,6 @@ interface ApiService {
 
     @GET("games")
     suspend fun getGames(
-        @Query("key") key: String,
         @Query("page") page: Int,
         @Query("ordering") ordering: String
     ): Response<GamesResponse>
@@ -19,6 +18,5 @@ interface ApiService {
     @GET("games/{id}")
     suspend fun getGame(
         @Path("id") id: String,
-        @Query("key") key: String
     ): Response<GamesDTO>
 }

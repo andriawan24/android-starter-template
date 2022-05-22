@@ -15,13 +15,13 @@ class GamesRepositoryImpl @Inject constructor(
     private val gamesDAO: GamesDAO
 ) : GamesRepository {
 
-    override suspend fun getAllGames(key: String, page: Int, ordering: String): List<Games> {
-        val response = safeApiRequest(apiService.getGames(key, page, ordering))
+    override suspend fun getAllGames(page: Int, ordering: String): List<Games> {
+        val response = safeApiRequest(apiService.getGames(page, ordering))
         return response?.toDomain() ?: emptyList()
     }
 
-    override suspend fun getGame(key: String, id: String): Games? {
-        val response = safeApiRequest(apiService.getGame(key = key, id = id))
+    override suspend fun getGame(id: String): Games? {
+        val response = safeApiRequest(apiService.getGame(id = id))
         return response?.toDomain()
     }
 

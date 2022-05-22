@@ -1,9 +1,13 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id(Plugins.LIBRARY)
     id(Plugins.KOTLIN)
     id(Plugins.KOTLIN_KAPT)
     id(Plugins.HILT)
 }
+
+val tokenApi: String = gradleLocalProperties(rootDir).getProperty("TOKEN_API")
 
 android {
     compileSdk = Config.COMPILE_SDK
@@ -16,8 +20,22 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.rawg.io/api/\"")
+            buildConfigField("String", "TOKEN_API", "\"$tokenApi\"")
+
             isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+
+        release {
+            buildConfigField("String", "BASE_URL", "\"https://api.rawg.io/api/\"")
+            buildConfigField("String", "TOKEN_API", "\"$tokenApi\"")
+
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

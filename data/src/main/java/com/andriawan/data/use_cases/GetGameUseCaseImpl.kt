@@ -21,7 +21,6 @@ class GetGameUseCaseImpl(
 
         try {
             val game = gamesRepository.getGame(
-                key = params.key,
                 id = params.id
             )
 

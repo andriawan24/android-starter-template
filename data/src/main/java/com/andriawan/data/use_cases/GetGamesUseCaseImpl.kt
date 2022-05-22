@@ -27,6 +27,13 @@ class GetGamesUseCaseImpl(
                 ordering = params.ordering
             )
 
+            gameList.forEach {
+                val isAdded = gamesRepository.getLikedGame(it.id)
+                if (isAdded != null) {
+                    gamesRepository.addLikeGame(it)
+                }
+            }
+
             emit(Resource.Success(data = gameList))
         } catch (e: Exception) {
             emit(Resource.Error(errorHandler.getError(e)))

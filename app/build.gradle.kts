@@ -106,16 +106,24 @@ dependencies {
     // Coil KT
     implementation(Coil.COIL_KT)
 
+    // Room Database
+    implementation(Room.RUNTIME)
+    kapt(Room.COMPILER)
+    implementation(Room.ROOM_KTX)
+
     // Local Testing
     testImplementation(Test.JUNIT)
     testImplementation(Hilt.HILT_ANDROID_TESTING)
+    testImplementation(Room.ROOM_TESTING)
     kaptTest(Hilt.HILT_COMPILER)
+    testImplementation("io.mockk:mockk:1.12.4")
 
     // Instrumentation Testing
     androidTestImplementation(Test.JUNIT_EXT)
     androidTestImplementation(Test.ESPRESSO)
     androidTestImplementation(Compose.COMPOSE_UI_TEST)
     androidTestImplementation(Hilt.HILT_ANDROID_TESTING)
+    androidTestImplementation(Room.ROOM_TESTING)
     kaptAndroidTest(Hilt.HILT_COMPILER)
 }
 

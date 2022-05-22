@@ -1,5 +1,6 @@
 package com.andriawan.data.di
 
+import com.andriawan.data.local.dao.GamesDAO
 import com.andriawan.data.network.ApiService
 import com.andriawan.data.repository.GamesRepositoryImpl
 import com.andriawan.domain.repository.GamesRepository
@@ -16,8 +17,9 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun providesGamesRepository(
-        apiService: ApiService
+        apiService: ApiService,
+        gamesDAO: GamesDAO
     ): GamesRepository {
-        return GamesRepositoryImpl(apiService)
+        return GamesRepositoryImpl(apiService, gamesDAO)
     }
 }

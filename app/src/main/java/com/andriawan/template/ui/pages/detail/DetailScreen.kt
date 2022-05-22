@@ -48,7 +48,7 @@ fun DetailScreen(
                     navController.navigateUp()
                 },
                 onLoveClicked = {
-
+                    viewModel.setLovedGame(it)
                 }
             )
         }

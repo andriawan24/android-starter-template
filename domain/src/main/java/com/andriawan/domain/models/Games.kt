@@ -1,11 +1,16 @@
 package com.andriawan.domain.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Games(
     val added: Int? = null,
     val background_image: String? = null,
     val community_rating: Int? = null,
     val dominant_color: String? = null,
     val genres: List<Genre?>? = null,
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val name: String? = null,
     val playtime: Int? = null,

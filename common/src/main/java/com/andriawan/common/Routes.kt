@@ -1,9 +1,13 @@
 package com.andriawan.common
 
 object Routes {
-    const val HOME_PAGE = "Home"
-    const val DETAIL_PAGE = "Detail"
-    const val LIKED_PAGE = "Liked"
-    const val SAVED_PAGE = "Saved"
-    const val PROFILE_PAGE = "Profile"
+    const val HOME_PAGE = "home"
+    const val DETAIL_PAGE = "detail"
+    const val LIKED_PAGE = "liked"
+    const val SAVED_PAGE = "saved"
+    const val PROFILE_PAGE = "profile"
+}
+
+object Args {
+    const val GAME_ID = "gameID"
 }

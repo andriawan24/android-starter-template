@@ -32,6 +32,7 @@ import com.andriawan.common_ui.CardColor
 import com.andriawan.common_ui.FloatingButtonColor
 import com.andriawan.common_ui.TemplateTheme
 import com.andriawan.common_ui.UnselectedBottomNavColor
+import com.andriawan.template.ui.components.MainNavigation
 import com.andriawan.template.ui.pages.home.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -48,42 +49,49 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val navController = rememberNavController()
-
                     MyApp {
+                        val navController = rememberNavController()
+                        var visible by remember { mutableStateOf(true) }
+                        val navBackStackEntry by navController.currentBackStackEntryAsState()
+                        visible = when (navBackStackEntry?.destination?.route) {
+                            Routes.HOME_PAGE -> {
+                                true
+                            }
+
+                            else -> {
+                                false
+                            }
+                        }
                         Scaffold(
                             bottomBar = {
-                                BottomAppBar(
-                                    cutoutShape = CircleShape,
-                                    backgroundColor = CardColor
-                                ) {
-                                    BottomNav(navHostController = navController)
+                                AnimatedVisibility(visible = visible) {
+                                    BottomAppBar(
+                                        cutoutShape = CircleShape,
+                                        backgroundColor = CardColor
+                                    ) {
+                                        BottomNav(navHostController = navController)
+                                    }
                                 }
                             },
                             floatingActionButton = {
-                                FloatingActionButton(
-                                    onClick = {
-                                        Timber.d("")
-                                    },
-                                    backgroundColor = FloatingButtonColor
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Search,
-                                        contentDescription = null
-                                    )
+                                AnimatedVisibility(visible = visible) {
+                                    FloatingActionButton(
+                                        onClick = {
+                                            Timber.d("")
+                                        },
+                                        backgroundColor = FloatingButtonColor
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Search,
+                                            contentDescription = null
+                                        )
+                                    }
                                 }
                             },
                             floatingActionButtonPosition = FabPosition.Center,
-                            isFloatingActionButtonDocked = true
+                            isFloatingActionButtonDocked = true,
                         ) {
-                            NavHost(
-                                navController = navController,
-                                startDestination = Routes.HOME_PAGE
-                            ) {
-                                composable(Routes.HOME_PAGE) {
-                                    HomeScreen()
-                                }
-                            }
+                            MainNavigation(navController)
                         }
                     }
                 }
@@ -95,44 +103,27 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BottomNav(navHostController: NavHostController) {
     val screens = remember { BottomNavDestination.values().toList() }
-
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    var visible by remember { mutableStateOf(true) }
-    visible = when (navHostController.currentDestination?.route) {
-        Routes.HOME_PAGE -> {
-            true
-        }
 
-        Routes.LIKED_PAGE -> {
-            true
-        }
-
-        else -> {
-            false
-        }
-    }
-
-    AnimatedVisibility(visible = visible) {
-        BottomNavigation(
-            backgroundColor = CardColor
-        ) {
-            screens.forEach { screen ->
-                if (screen == BottomNavDestination.BLANK_PAGE) {
-                    BottomNavigationItem(
-                        icon = { },
-                        label = { },
-                        selected = false,
-                        onClick = { },
-                        enabled = false
-                    )
-                } else {
-                    AddBottomNav(
-                        screen = screen,
-                        navController = navHostController,
-                        currentDestination = currentDestination
-                    )
-                }
+    BottomNavigation(
+        backgroundColor = CardColor
+    ) {
+        screens.forEach { screen ->
+            if (screen == BottomNavDestination.BLANK_PAGE) {
+                BottomNavigationItem(
+                    icon = { },
+                    label = { },
+                    selected = false,
+                    onClick = { },
+                    enabled = false
+                )
+            } else {
+                AddBottomNav(
+                    screen = screen,
+                    navController = navHostController,
+                    currentDestination = currentDestination
+                )
             }
         }
     }

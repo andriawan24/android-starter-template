@@ -2,6 +2,8 @@ package com.andriawan.template.ui.pages.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,20 +13,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.andriawan.common.Routes
 import com.andriawan.template.R
 import com.andriawan.template.ui.components.*
+import com.andriawan.template.utils.navigateWithParam
 
 @ExperimentalFoundationApi
 @Composable
 fun HomeScreen(
+    navController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val gameList = viewModel.gameList.value
     val categoryList by remember { mutableStateOf(getCategories()) }
+    val scrollState = rememberScrollState()
 
     if (!gameList.list.isNullOrEmpty()) {
-        Column {
+        Column(modifier = Modifier.verticalScroll(scrollState)) {
             HomeHeader(
                 title = stringResource(id = R.string.header_title),
                 imageProfile = "https://dummyimage.com/500x500/000/fff",
@@ -42,7 +48,12 @@ fun HomeScreen(
             ) {
                 GameList(
                     games = gameList.list
-                )
+                ) {
+                    navController.navigateWithParam(
+                        route = Routes.DETAIL_PAGE,
+                        it.id.toString() // Game ID
+                    )
+                }
             }
         }
     }

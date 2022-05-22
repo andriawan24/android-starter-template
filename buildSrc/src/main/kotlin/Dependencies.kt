@@ -38,6 +38,15 @@ object Compose {
     const val COMPOSE_HILT = "androidx.hilt:hilt-navigation-compose:$HILT_NAVIGATION_VERSION"
 }
 
+object Room {
+    private const val ROOM_VERSION = "2.4.2"
+
+    const val RUNTIME = "androidx.room:room-runtime:$ROOM_VERSION"
+    const val COMPILER = "androidx.room:room-compiler:$ROOM_VERSION"
+    const val ROOM_KTX = "androidx.room:room-ktx:$ROOM_VERSION"
+    const val ROOM_TESTING = "androidx.room:room-testing:$ROOM_VERSION"
+}
+
 object Log {
     private const val VERSION = "5.0.1"
 

@@ -1,6 +1,7 @@
 package com.andriawan.data.network.mappers
 
 import com.andriawan.data.network.models.*
+import com.andriawan.data.network.models.responses.GamesResponse
 import com.andriawan.domain.models.*
 
 fun GamesResponse.toDomain(): List<Games>? {
@@ -28,6 +29,34 @@ fun GamesResponse.toDomain(): List<Games>? {
             updated = it.updated
         )
     }
+}
+
+fun GamesDTO.toDomain(): Games {
+    return Games(
+        added = added,
+        background_image = background_image,
+        community_rating = community_rating,
+        dominant_color = dominant_color,
+        genres = genres?.map { genre -> genre?.toDomain() },
+        id = id,
+        name = name,
+        playtime = playtime,
+        rating = rating,
+        rating_top = rating_top,
+        ratings = ratings?.map { rating -> rating.toDomain() },
+        ratings_count = ratings_count,
+        released = released,
+        reviews_count = reviews_count,
+        reviews_text_count = reviews_text_count,
+        short_screenshots = short_screenshots?.map { screenShot -> screenShot?.toDomain() },
+        slug = slug,
+        tags = tags?.map { tag -> tag?.toDomain() },
+        tba = tba,
+        updated = updated,
+        description = description,
+        description_raw = description_raw,
+        saturated_color = saturated_color
+    )
 }
 
 fun GenreDTO.toDomain(): Genre {

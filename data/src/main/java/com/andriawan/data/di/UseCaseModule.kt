@@ -1,8 +1,10 @@
 package com.andriawan.data.di
 
 import com.andriawan.common.error.ErrorHandler
+import com.andriawan.data.use_cases.GetGameUseCaseImpl
 import com.andriawan.data.use_cases.GetGamesUseCaseImpl
 import com.andriawan.domain.repository.GamesRepository
+import com.andriawan.domain.use_cases.GetGameUseCase
 import com.andriawan.domain.use_cases.GetGamesUseCase
 import dagger.Module
 import dagger.Provides
@@ -21,5 +23,14 @@ object UseCaseModule {
         errorHandler: ErrorHandler
     ): GetGamesUseCase {
         return GetGamesUseCaseImpl(gamesRepository, errorHandler)
+    }
+
+    @Provides
+    @Singleton
+    fun providesGetGameUseCase(
+        gamesRepository: GamesRepository,
+        errorHandler: ErrorHandler
+    ): GetGameUseCase {
+        return GetGameUseCaseImpl(gamesRepository, errorHandler)
     }
 }

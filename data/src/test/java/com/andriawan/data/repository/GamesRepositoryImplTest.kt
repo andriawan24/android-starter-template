@@ -3,7 +3,7 @@ package com.andriawan.data.repository
 import com.andriawan.data.network.ApiService
 import com.andriawan.data.network.mappers.toDomain
 import com.andriawan.data.network.models.GamesDTO
-import com.andriawan.data.network.models.GamesResponse
+import com.andriawan.data.network.models.responses.GamesResponse
 import com.andriawan.domain.models.Games
 import io.mockk.coEvery
 import io.mockk.every
@@ -28,7 +28,7 @@ class GamesRepositoryImplTest {
         val gameItemListResponse: List<GamesDTO> = mockk()
         val gameListResponse = GamesResponse(
             count = Random.nextInt(),
-            next = Random.toString(),
+            next = toString(),
             previous = null,
             gameItemListResponse
         )

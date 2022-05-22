@@ -21,4 +21,9 @@ data class Games(
     val tags: List<Tag?>? = null,
     val tba: Boolean? = null,
     val updated: String? = null,
+
+    // Detail game
+    val description: String? = null,
+    val description_raw: String? = null,
+    val saturated_color: String? = null,
 )

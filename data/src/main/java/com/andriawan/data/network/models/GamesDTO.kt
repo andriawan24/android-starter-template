@@ -21,4 +21,9 @@ data class GamesDTO(
     val tags: List<TagDTO?>?,
     val tba: Boolean?,
     val updated: String?,
+
+    // Detail game
+    val description: String? = null,
+    val description_raw: String? = null,
+    val saturated_color: String? = null,
 )

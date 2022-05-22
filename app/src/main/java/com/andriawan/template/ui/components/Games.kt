@@ -3,6 +3,7 @@ package com.andriawan.template.ui.components
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.LocalOverScrollConfiguration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -24,10 +25,11 @@ import com.andriawan.common.R
 import com.andriawan.common_ui.SubtitleColor
 import com.andriawan.common_ui.TemplateTheme
 import com.andriawan.domain.models.Games
+import timber.log.Timber
 
 @ExperimentalFoundationApi
 @Composable
-fun GameList(games: List<Games>) {
+fun GameList(games: List<Games>, onGameClicked: (game: Games) -> Unit) {
     CompositionLocalProvider(LocalOverScrollConfiguration provides null) {
         LazyRow(
             modifier = Modifier
@@ -38,13 +40,16 @@ fun GameList(games: List<Games>) {
                 items = games,
                 key = { _, game ->
                     game.id
-                }
+                },
             ) { index, game ->
                 Spacer(modifier = Modifier.width(18.dp))
                 Column(
                     modifier = Modifier
                         .width(260.dp)
                         .height(242.dp)
+                        .clickable {
+                            onGameClicked.invoke(game)
+                        }
                 ) {
                     ImageGame(game = game)
                     Spacer(modifier = Modifier.height(12.dp))
@@ -137,7 +142,9 @@ fun GameListPreview() {
         Surface(
             modifier = Modifier.fillMaxWidth()
         ) {
-            GameList(games = gameList)
+            GameList(games = gameList) {
+                Timber.d("${it.name} Clicked")
+            }
         }
     }
 }

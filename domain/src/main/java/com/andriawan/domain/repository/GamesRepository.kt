@@ -4,4 +4,5 @@ import com.andriawan.domain.models.Games
 
 interface GamesRepository {
     suspend fun getAllGames(key: String, page: Int, ordering: String): List<Games>
+    suspend fun getGame(key: String, id: String): Games?
 }

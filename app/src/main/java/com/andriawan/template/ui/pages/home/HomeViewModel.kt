@@ -17,8 +17,8 @@ class HomeViewModel @Inject constructor(
     private val getGamesUseCase: GetGamesUseCase
 ) : ViewModel() {
 
-    private val _gameList = mutableStateOf(HomeState())
-    val gameList: State<HomeState> = _gameList
+    private val _homeState = mutableStateOf(HomeState())
+    val homeState: State<HomeState> = _homeState
 
     init {
         getData()
@@ -30,15 +30,15 @@ class HomeViewModel @Inject constructor(
             getGamesUseCase.execute(param).collectLatest {
                 when (it) {
                     Resource.Loading -> {
-                        _gameList.value = HomeState(isLoading = true)
+                        _homeState.value = HomeState(isLoading = true)
                     }
 
                     is Resource.Success -> {
-                        _gameList.value = HomeState(list = it.data)
+                        _homeState.value = HomeState(list = it.data)
                     }
 
                     is Resource.Error -> {
-                        _gameList.value = HomeState(
+                        _homeState.value = HomeState(
                             errorMessage = it.error.originalException.message
                         )
                     }

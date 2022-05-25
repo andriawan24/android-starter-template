@@ -11,10 +11,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.andriawan.common.Routes
+import com.andriawan.common_ui.TemplateTheme
+import com.andriawan.domain.models.Games
 import com.andriawan.template.R
 import com.andriawan.template.ui.components.*
 import com.andriawan.template.utils.navigateWithParam
@@ -25,44 +29,65 @@ fun HomeScreen(
     navController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val gameList = viewModel.gameList.value
-    val categoryList by remember { mutableStateOf(getCategories()) }
-    val scrollState = rememberScrollState()
+    val homeState = viewModel.homeState.value
 
-    if (!gameList.list.isNullOrEmpty()) {
-        Column(modifier = Modifier.verticalScroll(scrollState)) {
-            HomeHeader(
-                title = stringResource(id = R.string.header_title),
-                imageProfile = "https://dummyimage.com/500x500/000/fff",
-                haveNotification = false
-            )
-
-            ContentTitled(title = "Category", textPadding = 18.dp) {
-                CategoryCardList(categories = categoryList)
-            }
-
-            ContentTitled(
-                title = "Featured Games",
-                textPadding = 18.dp,
-                modifier = Modifier.padding(PaddingValues(top = 8.dp))
-            ) {
-                GameList(
-                    games = gameList.list
-                ) {
-                    navController.navigateWithParam(
-                        route = Routes.DETAIL_PAGE,
-                        it.id.toString() // Game ID
-                    )
-                }
-            }
-        }
+    if (!homeState.list.isNullOrEmpty()) {
+        MainHomeScreen(
+            navController = navController,
+            games = homeState.list
+        )
     }
 
-    if (gameList.isLoading) {
+    if (homeState.isLoading) {
         Text(text = "Loading...")
     }
 
-    if (gameList.errorMessage != null) {
-        Text(text = "${gameList.errorMessage}")
+    if (homeState.errorMessage != null) {
+        Text(text = "${homeState.errorMessage}")
+    }
+}
+
+@ExperimentalFoundationApi
+@Composable
+fun MainHomeScreen(
+    navController: NavHostController,
+    games: List<Games>
+) {
+    val scrollState = rememberScrollState()
+    val categoryList by remember { mutableStateOf(getCategories()) }
+    Column(modifier = Modifier.verticalScroll(scrollState)) {
+        HomeHeader(
+            title = stringResource(id = R.string.header_title),
+            imageProfile = "https://dummyimage.com/500x500/000/fff",
+            haveNotification = false
+        )
+
+        ContentTitled(title = "Category", textPadding = 18.dp) {
+            CategoryCardList(categories = categoryList)
+        }
+
+        ContentTitled(
+            title = "Featured Games",
+            textPadding = 18.dp,
+            modifier = Modifier.padding(PaddingValues(top = 8.dp))
+        ) {
+            GameList(games = games) {
+                navController.navigateWithParam(
+                    route = Routes.DETAIL_PAGE,
+                    it.id.toString() // Game ID
+                )
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+@ExperimentalFoundationApi
+fun HomeScreenPreview() {
+    TemplateTheme {
+        HomeScreen(
+            navController = rememberNavController()
+        )
     }
 }

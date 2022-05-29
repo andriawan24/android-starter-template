@@ -1,4 +1,6 @@
-package com.andriawan.common
+package com.andriawan.common.navigation
+
+import com.andriawan.common.R
 
 enum class BottomNavDestination(
     val routeName: String = "",

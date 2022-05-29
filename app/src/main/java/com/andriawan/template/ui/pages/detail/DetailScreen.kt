@@ -9,9 +9,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +24,8 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.andriawan.common_ui.TemplateTheme
 import com.andriawan.domain.models.Games
+import com.andriawan.template.ui.components.GameRating
+import com.andriawan.template.ui.components.LikedButton
 
 @Composable
 fun DetailScreen(
@@ -85,7 +84,9 @@ fun MainDetailPage(
             game = game,
             onBackClicked = onBackClicked,
             isLoved = isLoved,
-            onLoveClicked = onLoveClicked
+            onLoveClicked = {
+                onLoveClicked.invoke(game)
+            }
         )
         DetailBody(game = game)
     }
@@ -96,7 +97,7 @@ fun DetailHeader(
     game: Games,
     isLoved: Boolean,
     onBackClicked: () -> Unit,
-    onLoveClicked: (game: Games) -> Unit
+    onLoveClicked: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -111,9 +112,8 @@ fun DetailHeader(
             modifier = Modifier.weight(1F)
         )
         Spacer(modifier = Modifier.width(24.dp))
-        LoveButton(
-            game = game,
-            isLoved = isLoved,
+        LikedButton(
+            isLiked = isLoved,
             onLoveClicked = onLoveClicked
         )
     }
@@ -145,43 +145,6 @@ fun AppBarTitle(modifier: Modifier = Modifier, name: String, rating: Double) {
         )
         Spacer(modifier = Modifier.height(2.dp))
         GameRating(rating = rating)
-    }
-}
-
-@Composable
-fun GameRating(rating: Double) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Icon(
-            imageVector = Icons.Default.Star,
-            contentDescription = null,
-            modifier = Modifier.size(20.dp)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = rating.toString(),
-            style = MaterialTheme.typography.subtitle2
-        )
-    }
-}
-
-@Composable
-fun LoveButton(isLoved: Boolean, game: Games, onLoveClicked: (game: Games) -> Unit) {
-    IconButton(
-        onClick = {
-            onLoveClicked.invoke(game)
-        }
-    ) {
-        Icon(
-            imageVector = if (isLoved) {
-                Icons.Default.Favorite
-            } else {
-                Icons.Default.FavoriteBorder
-            },
-            contentDescription = null
-        )
     }
 }
 

@@ -1,4 +1,4 @@
-package com.andriawan.template.ui.components
+package com.andriawan.template.nav_graph
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
@@ -7,8 +7,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.andriawan.common.Args
-import com.andriawan.common.Routes
+import com.andriawan.common.navigation.Args
+import com.andriawan.common.navigation.Routes
 import com.andriawan.template.ui.pages.detail.DetailScreen
 import com.andriawan.template.ui.pages.home.HomeScreen
 

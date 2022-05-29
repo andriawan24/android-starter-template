@@ -16,12 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.andriawan.common.Routes
+import com.andriawan.common.navigation.Routes
 import com.andriawan.common_ui.TemplateTheme
 import com.andriawan.domain.models.Games
 import com.andriawan.template.R
 import com.andriawan.template.ui.components.*
-import com.andriawan.template.utils.navigateWithParam
+import com.andriawan.common.navigation.navigateWithParam
 
 @ExperimentalFoundationApi
 @Composable
@@ -62,12 +62,12 @@ fun MainHomeScreen(
             haveNotification = false
         )
 
-        ContentTitled(title = "Category", textPadding = 18.dp) {
+        ContentTitled(title = stringResource(id = R.string.category), textPadding = 18.dp) {
             CategoryCardList(categories = categoryList)
         }
 
         ContentTitled(
-            title = "Featured Games",
+            title = stringResource(id = R.string.featured_games),
             textPadding = 18.dp,
             modifier = Modifier.padding(PaddingValues(top = 8.dp))
         ) {

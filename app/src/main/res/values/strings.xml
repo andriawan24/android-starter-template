@@ -3,4 +3,6 @@
     <string name="title_activity_home_screen">HomeScreen</string>
 
     <string name="header_title">Learn From \nThe Real Master</string>
+    <string name="featured_games">Featured Games</string>
+    <string name="category">Category</string>
 </resources>

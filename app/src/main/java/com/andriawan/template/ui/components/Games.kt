@@ -29,6 +29,8 @@ fun GameList(
     games: List<Games>,
     onGameClicked: (game: Games) -> Unit
 ) {
+    var enable by remember { mutableStateOf(true) }
+
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth(),
@@ -45,7 +47,11 @@ fun GameList(
                     .height(242.dp)
                     .padding(PaddingValues(horizontal = 12.dp))
                     .clickable(
-                        onClick = { onGameClicked.invoke(game) }
+                        onClick = {
+                            onGameClicked.invoke(game)
+                            enable = false
+                        },
+                        enabled = enable
                     )
             ) {
                 ImageGame(game = game)

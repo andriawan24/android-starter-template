@@ -188,7 +188,6 @@ fun DescriptionGame(description: String) {
         modifier = Modifier
             .padding(PaddingValues(horizontal = 18.dp))
     ) {
-        Text(text = "Description")
         Text(text = description)
     }
 }

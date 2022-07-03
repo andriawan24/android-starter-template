@@ -16,7 +16,7 @@ class GamesRepositoryImpl @Inject constructor(
 ) : GamesRepository {
 
     override suspend fun getAllGames(page: Int, ordering: String): List<Games> {
-        val response = safeApiRequest(apiService.getGames(page, ordering))
+        val response = safeApiRequest(apiService.getGames(page = page, ordering = ordering))
         return response?.toDomain() ?: emptyList()
     }
 

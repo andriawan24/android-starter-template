@@ -52,6 +52,9 @@ dependencies {
     debugImplementation(Compose.COMPOSE_TOOLING)
     debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
 
+    // Detekt autoCorrect
+    detektPlugins(Detekt.DETEKT_AUTO_CORRECT)
+
     // Timber logging
     implementation(Log.TIMBER)
 }

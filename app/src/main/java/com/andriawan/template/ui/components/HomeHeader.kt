@@ -1,11 +1,11 @@
 package com.andriawan.template.ui.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.andriawan.common_ui.TemplateTheme
 import com.andriawan.template.R
 
 @Composable
@@ -86,16 +87,36 @@ fun HomeHeader(
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
+fun HomeHeaderPreviewNightMode() {
+    TemplateTheme {
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colors.background)
+        ) {
+            HomeHeader(
+                title = stringResource(id = R.string.header_title),
+                imageProfile = "https://dummyimage.com/500x500/000/fff",
+                haveNotification = false
+            )
+        }
+    }
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_NO)
+@Composable
 fun HomeHeaderPreview() {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colors.background)
-    ) {
-        HomeHeader(
-            title = stringResource(id = R.string.header_title),
-            imageProfile = "https://dummyimage.com/500x500/000/fff",
-            haveNotification = false
-        )
+    TemplateTheme {
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colors.background)
+        ) {
+            HomeHeader(
+                title = stringResource(id = R.string.header_title),
+                imageProfile = "https://dummyimage.com/500x500/000/fff",
+                haveNotification = false
+            )
+        }
     }
 }

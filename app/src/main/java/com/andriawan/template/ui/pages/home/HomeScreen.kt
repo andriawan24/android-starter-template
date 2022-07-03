@@ -1,18 +1,17 @@
 package com.andriawan.template.ui.pages.home
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -31,18 +30,13 @@ fun HomeScreen(
 ) {
     val homeState = viewModel.homeState.value
 
-    if (!homeState.list.isNullOrEmpty()) {
+    if (homeState.errorMessage == null) {
         MainHomeScreen(
             navController = navController,
-            games = homeState.list
+            games = homeState.list ,
+            isLoading = homeState.isLoading
         )
-    }
-
-    if (homeState.isLoading) {
-        Text(text = "Loading...")
-    }
-
-    if (homeState.errorMessage != null) {
+    } else {
         Text(text = "${homeState.errorMessage}")
     }
 }
@@ -51,9 +45,9 @@ fun HomeScreen(
 @Composable
 fun MainHomeScreen(
     navController: NavHostController,
-    games: List<Games>
+    games: List<Games>?,
+    isLoading: Boolean
 ) {
-    // val categoryList by remember { mutableStateOf(getCategories()) }
     Column {
         HomeHeader(
             title = stringResource(id = R.string.header_title),
@@ -61,34 +55,55 @@ fun MainHomeScreen(
             haveNotification = false
         )
 
-        GameList(games = games) {
-            navController.navigateWithParam(
-                route = Routes.DETAIL_PAGE,
-                it.id.toString() // Game ID
-            )
+        if (games.isNullOrEmpty() && isLoading) {
+            GamesShimmer()
+        } else {
+            games?.let { gamesNotNull ->
+                GameList(games = gamesNotNull) { game ->
+                    navController.navigateWithParam(
+                        route = Routes.DETAIL_PAGE,
+                        game.id.toString() // Game ID
+                    )
+                }
+            }
         }
-
-//        ContentTitled(title = stringResource(id = R.string.category), textPadding = 18.dp) {
-//            CategoryCardList(categories = categoryList)
-//        }
-
-//        ContentTitled(
-//            title = stringResource(id = R.string.featured_games),
-//            textPadding = 18.dp,
-//            modifier = Modifier.padding(PaddingValues(top = 8.dp))
-//        ) {
-//
-//        }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
 @Composable
 @ExperimentalFoundationApi
 fun HomeScreenPreview() {
     TemplateTheme {
-        HomeScreen(
-            navController = rememberNavController()
-        )
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.background)
+        ) {
+            MainHomeScreen(
+                navController = rememberNavController(),
+                games = emptyList(),
+                isLoading = true
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+@ExperimentalFoundationApi
+fun HomeScreenPreviewNightMode() {
+    TemplateTheme {
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.background)
+        ) {
+            MainHomeScreen(
+                navController = rememberNavController(),
+                games = emptyList(),
+                isLoading = true
+            )
+        }
     }
 }

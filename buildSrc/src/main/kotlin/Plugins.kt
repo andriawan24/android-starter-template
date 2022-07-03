@@ -12,6 +12,6 @@ object PluginVersions {
     const val ANDROID_APP = "7.1.3"
     const val KOTLIN = "1.6.10"
     const val LIBRARY = "7.2.0"
-    const val DETEKT = "1.20.0"
+    const val DETEKT = "1.21.0-RC2"
     const val HILT = "2.38.1"
 }

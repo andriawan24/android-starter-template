@@ -14,7 +14,9 @@ import com.andriawan.template.ui.pages.home.HomeScreen
 
 @ExperimentalFoundationApi
 @Composable
-fun MainNavigation(navController: NavHostController) {
+fun MainNavigation(
+    navController: NavHostController
+) {
     NavHost(
         navController = navController,
         startDestination = Routes.HOME_PAGE

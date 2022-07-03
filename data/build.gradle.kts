@@ -94,4 +94,7 @@ dependencies {
     androidTestImplementation(Hilt.HILT_ANDROID_TESTING)
     androidTestImplementation(Room.ROOM_TESTING)
     kaptAndroidTest(Hilt.HILT_COMPILER)
+
+    // Detekt autoCorrect
+    detektPlugins(Detekt.DETEKT_AUTO_CORRECT)
 }

@@ -34,17 +34,6 @@ fun BottomNav(navHostController: NavHostController) {
                 navController = navHostController,
                 currentDestination = currentDestination
             )
-//            if (screen == BottomNavDestination.BLANK_PAGE) {
-//                BottomNavigationItem(
-//                    icon = { },
-//                    label = { },
-//                    selected = false,
-//                    onClick = { },
-//                    enabled = false
-//                )
-//            } else {
-//
-//            }
         }
     }
 }

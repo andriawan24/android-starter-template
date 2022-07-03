@@ -76,3 +76,9 @@ object Test {
     const val JUNIT_EXT = "androidx.test.ext:junit:$JUNIT_EXT_VERSION"
     const val ESPRESSO = "androidx.test.espresso:espresso-core:$ESPRESSO_VERSION"
 }
+
+object Detekt {
+    private const val DETEKT_VERSION = "1.21.0-RC2"
+
+    const val DETEKT_AUTO_CORRECT = "io.gitlab.arturbosch.detekt:detekt-formatting:$DETEKT_VERSION"
+}

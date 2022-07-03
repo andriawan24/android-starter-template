@@ -6,7 +6,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.LocalOverScrollConfiguration
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -29,24 +31,27 @@ import timber.log.Timber
 
 @ExperimentalFoundationApi
 @Composable
-fun GameList(games: List<Games>, onGameClicked: (game: Games) -> Unit) {
+fun GameList(
+    games: List<Games>,
+    onGameClicked: (game: Games) -> Unit
+) {
     CompositionLocalProvider(LocalOverScrollConfiguration provides null) {
-        LazyRow(
+        LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(PaddingValues(vertical = 12.dp))
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
-            itemsIndexed(
+            items(
                 items = games,
-                key = { _, game ->
+                key = { game ->
                     game.id
                 },
-            ) { index, game ->
-                Spacer(modifier = Modifier.width(18.dp))
+            ) { game ->
                 Column(
                     modifier = Modifier
-                        .width(260.dp)
+                        .fillMaxWidth()
                         .height(242.dp)
+                        .padding(PaddingValues(horizontal = 12.dp))
                         .clickable {
                             onGameClicked.invoke(game)
                         }
@@ -67,9 +72,6 @@ fun GameList(games: List<Games>, onGameClicked: (game: Games) -> Unit) {
                             color = SubtitleColor
                         )
                     )
-                }
-                if (index == games.lastIndex) {
-                    Spacer(modifier = Modifier.width(18.dp))
                 }
             }
         }
@@ -109,13 +111,6 @@ fun ImageGame(game: Games) {
 
             if (isLoading) {
                 CircularProgressIndicator(
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                )
-            } else {
-                Image(
-                    painter = painterResource(id = R.drawable.btn_play),
-                    contentDescription = "Play Button Image",
                     modifier = Modifier
                         .align(Alignment.Center)
                 )

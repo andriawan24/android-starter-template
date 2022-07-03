@@ -53,31 +53,32 @@ fun MainHomeScreen(
     navController: NavHostController,
     games: List<Games>
 ) {
-    val scrollState = rememberScrollState()
-    val categoryList by remember { mutableStateOf(getCategories()) }
-    Column(modifier = Modifier.verticalScroll(scrollState)) {
+    // val categoryList by remember { mutableStateOf(getCategories()) }
+    Column {
         HomeHeader(
             title = stringResource(id = R.string.header_title),
             imageProfile = "https://dummyimage.com/500x500/000/fff",
             haveNotification = false
         )
 
-        ContentTitled(title = stringResource(id = R.string.category), textPadding = 18.dp) {
-            CategoryCardList(categories = categoryList)
+        GameList(games = games) {
+            navController.navigateWithParam(
+                route = Routes.DETAIL_PAGE,
+                it.id.toString() // Game ID
+            )
         }
 
-        ContentTitled(
-            title = stringResource(id = R.string.featured_games),
-            textPadding = 18.dp,
-            modifier = Modifier.padding(PaddingValues(top = 8.dp))
-        ) {
-            GameList(games = games) {
-                navController.navigateWithParam(
-                    route = Routes.DETAIL_PAGE,
-                    it.id.toString() // Game ID
-                )
-            }
-        }
+//        ContentTitled(title = stringResource(id = R.string.category), textPadding = 18.dp) {
+//            CategoryCardList(categories = categoryList)
+//        }
+
+//        ContentTitled(
+//            title = stringResource(id = R.string.featured_games),
+//            textPadding = 18.dp,
+//            modifier = Modifier.padding(PaddingValues(top = 8.dp))
+//        ) {
+//
+//        }
     }
 }
 

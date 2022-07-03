@@ -29,21 +29,22 @@ fun BottomNav(navHostController: NavHostController) {
         backgroundColor = CardColor
     ) {
         screens.forEach { screen ->
-            if (screen == BottomNavDestination.BLANK_PAGE) {
-                BottomNavigationItem(
-                    icon = { },
-                    label = { },
-                    selected = false,
-                    onClick = { },
-                    enabled = false
-                )
-            } else {
-                AddBottomNav(
-                    screen = screen,
-                    navController = navHostController,
-                    currentDestination = currentDestination
-                )
-            }
+            AddBottomNav(
+                screen = screen,
+                navController = navHostController,
+                currentDestination = currentDestination
+            )
+//            if (screen == BottomNavDestination.BLANK_PAGE) {
+//                BottomNavigationItem(
+//                    icon = { },
+//                    label = { },
+//                    selected = false,
+//                    onClick = { },
+//                    enabled = false
+//                )
+//            } else {
+//
+//            }
         }
     }
 }

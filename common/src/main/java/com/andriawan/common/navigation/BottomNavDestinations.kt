@@ -13,14 +13,14 @@ enum class BottomNavDestination(
     LIKED_PAGE(
         routeName = Routes.LIKED_PAGE,
         icon = R.drawable.ic_love
-    ),
-    BLANK_PAGE,
-    SAVED_PAGE(
-        routeName = Routes.SAVED_PAGE,
-        icon = R.drawable.ic_play
-    ),
-    PROFILE_PAGE(
-        routeName = Routes.PROFILE_PAGE,
-        icon = R.drawable.ic_user
     )
+//    BLANK_PAGE,
+//    SAVED_PAGE(
+//        routeName = Routes.SAVED_PAGE,
+//        icon = R.drawable.ic_play
+//    ),
+//    PROFILE_PAGE(
+//        routeName = Routes.PROFILE_PAGE,
+//        icon = R.drawable.ic_user
+//    )
 }

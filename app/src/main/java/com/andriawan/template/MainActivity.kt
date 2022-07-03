@@ -5,8 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -58,6 +57,7 @@ class MainActivity : ComponentActivity() {
                                 false
                             }
                         }
+
                         Scaffold(
                             bottomBar = {
                                 AnimatedVisibility(visible = visible) {
@@ -68,26 +68,11 @@ class MainActivity : ComponentActivity() {
                                         BottomNav(navHostController = navController)
                                     }
                                 }
-                            },
-                            floatingActionButton = {
-                                AnimatedVisibility(visible = visible) {
-                                    FloatingActionButton(
-                                        onClick = {
-                                            Timber.d("")
-                                        },
-                                        backgroundColor = FloatingButtonColor
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.Search,
-                                            contentDescription = null
-                                        )
-                                    }
-                                }
-                            },
-                            floatingActionButtonPosition = FabPosition.Center,
-                            isFloatingActionButtonDocked = true,
+                            }
                         ) {
-                            MainNavigation(navController)
+                            Column(modifier = Modifier.padding(it)) {
+                                MainNavigation(navController = navController)
+                            }
                         }
                     }
                 }

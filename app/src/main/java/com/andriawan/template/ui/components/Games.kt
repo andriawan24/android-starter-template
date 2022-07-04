@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,52 +27,40 @@ import timber.log.Timber
 @ExperimentalFoundationApi
 @Composable
 fun GameList(
-    games: List<Games>,
-    onGameClicked: (game: Games) -> Unit
+    game: Games,
+    onGameClicked: () -> Unit
 ) {
     var enable by remember { mutableStateOf(true) }
 
-    LazyColumn(
+    Column(
         modifier = Modifier
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement
-            .spacedBy(18.dp)
+            .fillMaxWidth()
+            .height(242.dp)
+            .padding(PaddingValues(horizontal = 12.dp))
+            .clickable(
+                onClick = {
+                    onGameClicked()
+                    enable = false
+                },
+                enabled = enable
+            )
     ) {
-        items(
-            items = games,
-            key = { game -> game.id }
-        ) { game ->
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(242.dp)
-                    .padding(PaddingValues(horizontal = 12.dp))
-                    .clickable(
-                        onClick = {
-                            onGameClicked.invoke(game)
-                            enable = false
-                        },
-                        enabled = enable
-                    )
-            ) {
-                ImageGame(game = game)
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    text = game.name ?: "No Name",
-                    style = MaterialTheme.typography.subtitle1.copy(
-                        color = MaterialTheme.colors.onBackground
-                    ),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = DateUtils.getYear(game.released ?: ""),
-                    style = MaterialTheme.typography.subtitle2.copy(
-                        color = SubtitleColor
-                    )
-                )
-            }
-        }
+        ImageGame(game = game)
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = game.name ?: "No Name",
+            style = MaterialTheme.typography.subtitle1.copy(
+                color = MaterialTheme.colors.onBackground
+            ),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+        Text(
+            text = DateUtils.getYear(game.released ?: ""),
+            style = MaterialTheme.typography.subtitle2.copy(
+                color = SubtitleColor
+            )
+        )
     }
 }
 
@@ -130,9 +119,10 @@ fun GameListPreview() {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            GameList(games = gameList) {
-                Timber.d("${it.name} Clicked")
-            }
+            GameList(
+                game = gameList[0],
+                onGameClicked = { }
+            )
         }
     }
 }

@@ -31,8 +31,6 @@ fun LikedButton(isLiked: Boolean, onLoveClicked: () -> Unit) {
 @Composable
 fun LikedButtonPreview() {
     TemplateTheme {
-        LikedButton(isLiked = true) {
-
-        }
+        LikedButton(isLiked = true) { }
     }
 }

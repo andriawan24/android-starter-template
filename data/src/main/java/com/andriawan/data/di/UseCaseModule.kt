@@ -1,15 +1,9 @@
 package com.andriawan.data.di
 
 import com.andriawan.common.error.ErrorHandler
-import com.andriawan.data.use_cases.GetGameUseCaseImpl
-import com.andriawan.data.use_cases.GetGamesUseCaseImpl
-import com.andriawan.data.use_cases.ToggleLikeGameUseCaseImpl
-import com.andriawan.data.use_cases.GetLikedGameUseCaseImpl
+import com.andriawan.data.use_cases.*
 import com.andriawan.domain.repository.GamesRepository
-import com.andriawan.domain.use_cases.ToggleLikedGameUseCase
-import com.andriawan.domain.use_cases.GetGameUseCase
-import com.andriawan.domain.use_cases.GetGamesUseCase
-import com.andriawan.domain.use_cases.GetLikedGameUseCase
+import com.andriawan.domain.use_cases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,5 +48,14 @@ object UseCaseModule {
         errorHandler: ErrorHandler
     ): GetLikedGameUseCase {
         return GetLikedGameUseCaseImpl(gamesRepository, errorHandler)
+    }
+
+    @Provides
+    @Singleton
+    fun providesGetLikedGamesUseCase(
+        gamesRepository: GamesRepository,
+        errorHandler: ErrorHandler
+    ): GetLikedGamesUseCase {
+        return GetLikedGamesUseCaseImpl(gamesRepository, errorHandler)
     }
 }

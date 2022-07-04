@@ -16,7 +16,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.andriawan.common.navigation.BottomNavDestination
-import com.andriawan.common_ui.CardColor
+import com.andriawan.common_ui.DarkCardColor
 import com.andriawan.common_ui.UnselectedBottomNavColor
 
 @Composable
@@ -26,7 +26,7 @@ fun BottomNav(navHostController: NavHostController) {
     val currentDestination = navBackStackEntry?.destination
 
     BottomNavigation(
-        backgroundColor = CardColor
+        backgroundColor = DarkCardColor
     ) {
         screens.forEach { screen ->
             AddBottomNav(
@@ -45,9 +45,7 @@ fun RowScope.AddBottomNav(
     navController: NavController
 ) {
     BottomNavigationItem(
-        label = {
-            screen.routeName
-        },
+        label = { screen.routeName },
         icon = {
             Icon(
                 painter = painterResource(id = screen.icon),

@@ -44,25 +44,7 @@ fun GamesShimmer() {
                         .height(180.dp)
                         .padding(PaddingValues(horizontal = 12.dp))
                         .setShimmer(true)
-                ) {
-                    Column {
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(
-                            text = "",
-                            style = MaterialTheme.typography.subtitle1.copy(
-                                color = MaterialTheme.colors.onBackground
-                            ),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Text(
-                            text = "",
-                            style = MaterialTheme.typography.subtitle2.copy(
-                                color = SubtitleColor
-                            )
-                        )
-                    }
-                }
+                )
             }
         }
     }
@@ -74,9 +56,9 @@ private fun Modifier.setShimmer(
 
     if (isShimmer) {
         val shimmerColorState = listOf(
-            Color.LightGray.copy(alpha = 0.9f),
+            Color.LightGray.copy(alpha = 0.7f),
             Color.LightGray.copy(alpha = 0.2f),
-            Color.LightGray.copy(alpha = 0.9f)
+            Color.LightGray.copy(alpha = 0.7f)
         )
 
         val transition = rememberInfiniteTransition()

@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -23,10 +24,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.andriawan.common.navigation.BottomNavDestination
 import com.andriawan.common.navigation.Routes
-import com.andriawan.common_ui.CardColor
-import com.andriawan.common_ui.FloatingButtonColor
-import com.andriawan.common_ui.TemplateTheme
-import com.andriawan.common_ui.UnselectedBottomNavColor
+import com.andriawan.common_ui.*
 import com.andriawan.template.nav_graph.MainNavigation
 import com.andriawan.template.ui.components.BottomNav
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,13 +40,14 @@ class MainActivity : ComponentActivity() {
             TemplateTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colors.background,
                 ) {
                     MyApp {
                         val navController = rememberNavController()
                         var visible by remember { mutableStateOf(true) }
                         val navBackStackEntry by navController.currentBackStackEntryAsState()
                         visible = when (navBackStackEntry?.destination?.route) {
+                            Routes.LIKED_PAGE,
                             Routes.HOME_PAGE -> {
                                 true
                             }
@@ -63,7 +62,7 @@ class MainActivity : ComponentActivity() {
                                 AnimatedVisibility(visible = visible) {
                                     BottomAppBar(
                                         cutoutShape = CircleShape,
-                                        backgroundColor = CardColor
+                                        backgroundColor = if (isSystemInDarkTheme()) DarkCardColor else CardColor
                                     ) {
                                         BottomNav(navHostController = navController)
                                     }

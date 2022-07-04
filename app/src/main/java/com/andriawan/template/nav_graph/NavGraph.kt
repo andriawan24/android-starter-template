@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import com.andriawan.common.navigation.Args
 import com.andriawan.common.navigation.Routes
 import com.andriawan.template.ui.pages.detail.DetailScreen
+import com.andriawan.template.ui.pages.favorites.FavoriteScreen
 import com.andriawan.template.ui.pages.home.HomeScreen
 
 @ExperimentalFoundationApi
@@ -37,6 +38,12 @@ fun MainNavigation(
             DetailScreen(
                 navController = navController,
                 gameId = it.arguments?.getString(Args.GAME_ID) ?: ""
+            )
+        }
+
+        composable(route = Routes.LIKED_PAGE) {
+            FavoriteScreen(
+                navHostController = navController
             )
         }
     }

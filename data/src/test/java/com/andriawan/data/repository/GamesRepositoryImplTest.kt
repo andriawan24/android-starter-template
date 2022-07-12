@@ -22,7 +22,6 @@ class GamesRepositoryImplTest {
 
     @Test
     fun getAllGames() = runBlocking {
-        val key = "9ffc4221551641a6a54f5e2cedba5994"
         val page = 1
         val response: Response<GamesResponse> = mockk()
         val gameItemListResponse: List<GamesDTO> = mockk()
@@ -35,7 +34,7 @@ class GamesRepositoryImplTest {
         val gameList: List<Games> = mockk()
 
         coEvery {
-            apiService.getGames(key, page, "-rating")
+            apiService.getGames(page, "-rating")
         } returns response
 
         every {

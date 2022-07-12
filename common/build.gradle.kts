@@ -41,6 +41,20 @@ dependencies {
     androidTestImplementation(Test.JUNIT_EXT)
     androidTestImplementation(Test.ESPRESSO)
 
+    // Compose
+    implementation(Compose.COMPOSE_ACTIVITY)
+    implementation(Compose.COMPOSE_UI)
+    implementation(Compose.COMPOSE_MATERIAL)
+    implementation(Compose.COMPOSE_TOOLING_PREVIEW)
+    implementation(Compose.COMPOSE_LIFECYCLE)
+    implementation(Compose.COMPOSE_NAVIGATION)
+    implementation(Compose.COMPOSE_HILT)
+    debugImplementation(Compose.COMPOSE_TOOLING)
+    debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
+
+    // Detekt autoCorrect
+    detektPlugins(Detekt.DETEKT_AUTO_CORRECT)
+
     // Timber logging
     implementation(Log.TIMBER)
 }

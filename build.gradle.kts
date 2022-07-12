@@ -13,6 +13,7 @@ subprojects {
     detekt {
         toolVersion = PluginVersions.DETEKT
         config = files("${project.rootDir}/config/detekt/detekt.yml")
+        autoCorrect = true
     }
 
     tasks.withType<Detekt>().configureEach {

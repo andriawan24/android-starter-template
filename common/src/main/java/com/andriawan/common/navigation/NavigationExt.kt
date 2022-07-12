@@ -1,4 +1,4 @@
-package com.andriawan.template.utils
+package com.andriawan.common.navigation
 
 import androidx.navigation.NavHostController
 

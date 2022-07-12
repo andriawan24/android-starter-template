@@ -5,6 +5,6 @@ import com.andriawan.domain.utils.FlowableUseCase
 
 interface GetLikedGameUseCase: FlowableUseCase<GetLikedGameParam, Games?>
 
-class GetLikedGameParam(
+data class GetLikedGameParam(
     val gameId: Int
 )

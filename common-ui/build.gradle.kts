@@ -75,4 +75,7 @@ dependencies {
     androidTestImplementation(Compose.COMPOSE_UI_TEST)
     androidTestImplementation(Hilt.HILT_ANDROID_TESTING)
     kaptAndroidTest(Hilt.HILT_COMPILER)
+
+    // Detekt autoCorrect
+    detektPlugins(Detekt.DETEKT_AUTO_CORRECT)
 }

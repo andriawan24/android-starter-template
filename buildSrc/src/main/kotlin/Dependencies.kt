@@ -1,6 +1,6 @@
 object AndroidX {
-    private const val CORE_KTX_VERSION = "1.7.0"
-    private const val LIFECYCLE_VERSION = "2.4.1"
+    private const val CORE_KTX_VERSION = "1.9.0"
+    private const val LIFECYCLE_VERSION = "2.5.1"
 
     const val CORE_KTX = "androidx.core:core-ktx:$CORE_KTX_VERSION"
     const val LIFECYCLE = "androidx.lifecycle:lifecycle-runtime-ktx:$LIFECYCLE_VERSION"
@@ -10,7 +10,7 @@ object AndroidX {
 object Retrofit {
     private const val VERSION = "2.9.0"
 
-    const val RETROFIT = "com.squareup.retrofit2:retrofit:$VERSION"
+    const val RETROFIT2 = "com.squareup.retrofit2:retrofit:$VERSION"
     const val GSON_CONVERTER = "com.squareup.retrofit2:converter-gson:$VERSION"
 }
 

@@ -42,6 +42,7 @@ dependencies {
     androidTestImplementation(Test.ESPRESSO)
 
     // Compose
+    implementation(platform(Compose.COMPOSE_BOM))
     implementation(Compose.COMPOSE_ACTIVITY)
     implementation(Compose.COMPOSE_UI)
     implementation(Compose.COMPOSE_MATERIAL)

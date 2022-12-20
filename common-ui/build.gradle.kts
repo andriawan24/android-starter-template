@@ -38,7 +38,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Compose.COMPOSE_VERSION
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 
     packagingOptions {
@@ -55,12 +55,14 @@ dependencies {
     implementation(AndroidX.LIFECYCLE_VIEW_MODEL)
 
     // Compose
+    implementation(platform(Compose.COMPOSE_BOM))
     implementation(Compose.COMPOSE_ACTIVITY)
     implementation(Compose.COMPOSE_UI)
     implementation(Compose.COMPOSE_MATERIAL)
     implementation(Compose.COMPOSE_TOOLING_PREVIEW)
     implementation(Compose.COMPOSE_LIFECYCLE)
     implementation(Compose.COMPOSE_NAVIGATION)
+    debugImplementation(platform(Compose.COMPOSE_BOM))
     debugImplementation(Compose.COMPOSE_TOOLING)
     debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
 
@@ -70,6 +72,7 @@ dependencies {
     kaptTest(Hilt.HILT_COMPILER)
 
     // Instrumentation Testing
+    androidTestImplementation(platform(Compose.COMPOSE_BOM))
     androidTestImplementation(Test.JUNIT_EXT)
     androidTestImplementation(Test.ESPRESSO)
     androidTestImplementation(Compose.COMPOSE_UI_TEST)

@@ -1,4 +1,4 @@
-package com.andriawan.template.nav_graph
+package com.andriawan.template.navigation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable

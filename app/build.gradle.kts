@@ -57,7 +57,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Compose.COMPOSE_VERSION
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 
     packagingOptions {
@@ -86,6 +86,7 @@ dependencies {
     implementation(OKHttp3.LOGGING_INTERCEPTOR)
 
     // Compose
+    implementation(platform(Compose.COMPOSE_BOM))
     implementation(Compose.COMPOSE_ACTIVITY)
     implementation(Compose.COMPOSE_UI)
     implementation(Compose.COMPOSE_MATERIAL)
@@ -93,6 +94,7 @@ dependencies {
     implementation(Compose.COMPOSE_LIFECYCLE)
     implementation(Compose.COMPOSE_NAVIGATION)
     implementation(Compose.COMPOSE_HILT)
+    debugImplementation(platform(Compose.COMPOSE_BOM))
     debugImplementation(Compose.COMPOSE_TOOLING)
     debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
 
@@ -116,9 +118,10 @@ dependencies {
     testImplementation(Hilt.HILT_ANDROID_TESTING)
     testImplementation(Room.ROOM_TESTING)
     kaptTest(Hilt.HILT_COMPILER)
-    testImplementation("io.mockk:mockk:1.12.4")
+    testImplementation("io.mockk:mockk:1.13.3")
 
     // Instrumentation Testing
+    androidTestImplementation(platform(Compose.COMPOSE_BOM))
     androidTestImplementation(Test.JUNIT_EXT)
     androidTestImplementation(Test.ESPRESSO)
     androidTestImplementation(Compose.COMPOSE_UI_TEST)

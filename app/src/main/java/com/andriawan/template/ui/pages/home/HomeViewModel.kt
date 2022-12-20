@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     var homeState by mutableStateOf(HomeState())
-    private set
+        private set
 
 //    private val paginator = DefaultPaginator<Int, Games>(
 //        initialKey = homeState.currentPage,
@@ -40,11 +40,9 @@ class HomeViewModel @Inject constructor(
         getData()
     }
 
-    fun getData() {
+    private fun getData() {
         viewModelScope.launch {
-            val param = GetGamesParam(
-                page = homeState.currentPage
-            )
+            val param = GetGamesParam(page = homeState.currentPage)
             getGamesUseCase.execute(param).collectLatest {
                 when (it) {
                     Resource.Loading -> {
@@ -67,6 +65,14 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun checkOverScrolled(index: Int) {
+        if (index == homeState.list.orEmpty().size - 1 && homeState.list.orEmpty()
+                .isNotEmpty() && !homeState.endReach
+        ) {
+            getData()
         }
     }
 }

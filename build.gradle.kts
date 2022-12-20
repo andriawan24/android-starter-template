@@ -7,6 +7,7 @@ plugins {
     id(Plugins.KOTLIN) version PluginVersions.KOTLIN apply false
     id(Plugins.DETEKT) version PluginVersions.DETEKT
     id("com.github.ben-manes.versions") version "0.44.0" apply false
+    id(Plugins.HILT) version "2.44.2" apply false
 }
 
 allprojects {

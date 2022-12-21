@@ -1,6 +1,6 @@
 package com.andriawan.common.paginator
 
-interface Paginator<Key, Item> {
+interface Pagination<Key, Item> {
     suspend fun loadNextItem()
     fun reset()
 }

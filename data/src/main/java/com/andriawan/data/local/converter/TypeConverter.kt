@@ -1,55 +1,55 @@
 package com.andriawan.data.local.converter
 
 import androidx.room.TypeConverter
-import com.andriawan.domain.models.Genre
-import com.andriawan.domain.models.Rating
-import com.andriawan.domain.models.ShortScreenshot
-import com.andriawan.domain.models.Tag
+import com.andriawan.domain.models.GenreModel
+import com.andriawan.domain.models.RatingModel
+import com.andriawan.domain.models.ShortScreenshotModel
+import com.andriawan.domain.models.TagModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class TypeConverter {
 
     @TypeConverter
-    fun convertGenreListToString(genres: List<Genre>): String {
+    fun convertGenreListToString(genres: List<GenreModel>): String {
         return Gson().toJson(genres)
     }
 
     @TypeConverter
-    fun convertStringToGenreList(genreString: String): List<Genre> {
-        return Gson().fromJson(genreString, object : TypeToken<List<Genre>>() {}.type)
+    fun convertStringToGenreList(genreString: String): List<GenreModel> {
+        return Gson().fromJson(genreString, object : TypeToken<List<GenreModel>>() {}.type)
     }
 
     @TypeConverter
-    fun convertRatingsToString(ratings: List<Rating>): String {
+    fun convertRatingsToString(ratings: List<RatingModel>): String {
         return Gson().toJson(ratings)
     }
 
     @TypeConverter
-    fun convertStringToRatings(ratingString: String): List<Rating> {
-        return Gson().fromJson(ratingString, object : TypeToken<List<Rating>>() {}.type)
+    fun convertStringToRatings(ratingString: String): List<RatingModel> {
+        return Gson().fromJson(ratingString, object : TypeToken<List<RatingModel>>() {}.type)
     }
 
     @TypeConverter
-    fun convertTagsToString(tags: List<Tag>): String {
+    fun convertTagsToString(tags: List<TagModel>): String {
         return Gson().toJson(tags)
     }
 
     @TypeConverter
-    fun convertStringToTags(tagsString: String): List<Tag> {
-        return Gson().fromJson(tagsString, object : TypeToken<List<Tag>>() {}.type)
+    fun convertStringToTags(tagsString: String): List<TagModel> {
+        return Gson().fromJson(tagsString, object : TypeToken<List<TagModel>>() {}.type)
     }
 
     @TypeConverter
-    fun convertShortScreenShotToString(shortScreenshots: List<ShortScreenshot?>?): String? {
+    fun convertShortScreenShotToString(shortScreenshots: List<ShortScreenshotModel?>?): String? {
         return Gson().toJson(shortScreenshots)
     }
 
     @TypeConverter
-    fun convertStringToShortScreenShot(shortScreenshotsString: String?): List<ShortScreenshot?>? {
+    fun convertStringToShortScreenShot(shortScreenshotsString: String?): List<ShortScreenshotModel?>? {
         return Gson().fromJson(
             shortScreenshotsString,
-            object : TypeToken<List<ShortScreenshot>>() {}.type
+            object : TypeToken<List<ShortScreenshotModel>>() {}.type
         )
     }
 }

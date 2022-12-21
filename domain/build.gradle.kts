@@ -38,16 +38,11 @@ android {
 dependencies {
     implementation(project(":common"))
 
-    // AndroidX
-    implementation(AndroidX.CORE_KTX)
-    implementation(AndroidX.LIFECYCLE)
+    getCommonDependencies()
 
     // Retrofit
     implementation(Retrofit.RETROFIT2)
     implementation(Retrofit.GSON_CONVERTER)
-
-    // Timber Logging
-    implementation(Log.TIMBER)
 
     // Hilt
     implementation(Hilt.HILT_ANDROID)

@@ -57,43 +57,11 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":common"))
 
-    // AndroidX
-    implementation(AndroidX.CORE_KTX)
-    implementation(AndroidX.LIFECYCLE)
-
-    // Retrofit
-    implementation(Retrofit.RETROFIT2)
-    implementation(Retrofit.GSON_CONVERTER)
-
-    // OKHTTP3 Logging
-    implementation(OKHttp3.LOGGING_INTERCEPTOR)
-
-    // Timber Logging
-    implementation(Log.TIMBER)
-
-    // Hilt
-    implementation(Hilt.HILT_ANDROID)
-    kapt(Hilt.HILT_COMPILER)
-
-    // Room Database
-    implementation(Room.RUNTIME)
-    kapt(Room.COMPILER)
-    implementation(Room.ROOM_KTX)
-
-    // Local Testing
-    testImplementation(Test.JUNIT)
-    testImplementation(Hilt.HILT_ANDROID_TESTING)
-    testImplementation(Room.ROOM_TESTING)
-    kaptTest(Hilt.HILT_COMPILER)
-    testImplementation("io.mockk:mockk:1.12.4")
-
-    // Instrumentation Testing
-    androidTestImplementation(Test.JUNIT_EXT)
-    androidTestImplementation(Test.ESPRESSO)
-    androidTestImplementation(Compose.COMPOSE_UI_TEST)
-    androidTestImplementation(Hilt.HILT_ANDROID_TESTING)
-    androidTestImplementation(Room.ROOM_TESTING)
-    kaptAndroidTest(Hilt.HILT_COMPILER)
+    getCommonDependencies()
+    getNetworkDependencies()
+    getHiltDependencies()
+    getDatabaseDependencies()
+    getCommonTestingDependencies()
 
     // Detekt autoCorrect
     detektPlugins(Detekt.DETEKT_AUTO_CORRECT)

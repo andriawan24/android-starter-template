@@ -23,7 +23,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.andriawan.common_ui.TemplateTheme
-import com.andriawan.domain.models.Games
+import com.andriawan.domain.models.GameModel
 import com.andriawan.template.ui.components.GameRating
 import com.andriawan.template.ui.components.LikedButton
 
@@ -74,10 +74,10 @@ fun DetailScreen(
 
 @Composable
 fun MainDetailPage(
-    game: Games,
+    game: GameModel,
     isLoved: Boolean,
     onBackClicked: () -> Unit,
-    onLoveClicked: (game: Games) -> Unit
+    onLoveClicked: (game: GameModel) -> Unit
 ) {
     Column {
         DetailHeader(
@@ -94,7 +94,7 @@ fun MainDetailPage(
 
 @Composable
 fun DetailHeader(
-    game: Games,
+    game: GameModel,
     isLoved: Boolean,
     onBackClicked: () -> Unit,
     onLoveClicked: () -> Unit
@@ -149,15 +149,15 @@ fun AppBarTitle(modifier: Modifier = Modifier, name: String, rating: Double) {
 }
 
 @Composable
-fun DetailBody(game: Games) {
+fun DetailBody(game: GameModel) {
     val scrollState = rememberScrollState()
 
     Column(
         modifier = Modifier
             .verticalScroll(scrollState)
     ) {
-        DetailPoster(image = game.background_image ?: "")
-        DescriptionGame(description = game.description_raw.toString())
+        DetailPoster(image = game.backgroundImage ?: "")
+        DescriptionGame(description = game.descriptionRaw.toString())
     }
 }
 

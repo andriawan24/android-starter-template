@@ -15,13 +15,13 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.andriawan.common.navigation.BottomNavDestination
+import com.andriawan.common.navigation.BottomNavDestinations
 import com.andriawan.common_ui.DarkCardColor
 import com.andriawan.common_ui.UnselectedBottomNavColor
 
 @Composable
 fun BottomNav(navHostController: NavHostController) {
-    val screens = remember { BottomNavDestination.values().toList() }
+    val screens = remember { BottomNavDestinations.values().toList() }
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
@@ -40,7 +40,7 @@ fun BottomNav(navHostController: NavHostController) {
 
 @Composable
 fun RowScope.AddBottomNav(
-    screen: BottomNavDestination,
+    screen: BottomNavDestinations,
     currentDestination: NavDestination?,
     navController: NavController
 ) {

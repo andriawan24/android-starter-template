@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andriawan.common.Resource
-import com.andriawan.domain.models.Games
+import com.andriawan.domain.models.GameModel
 import com.andriawan.domain.use_cases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -24,9 +24,7 @@ class DetailViewModel @Inject constructor(
 
     fun getGame(id: String) {
         viewModelScope.launch {
-            val param = GetGameParam(
-                id = id
-            )
+            val param = GetGameUseCase.Param(id = id)
             getGameUseCase.execute(param).collectLatest {
                 when (it) {
                     Resource.Loading -> {
@@ -52,7 +50,7 @@ class DetailViewModel @Inject constructor(
 
     private fun getIsLoved(gameID: Int) {
         viewModelScope.launch {
-            val param = GetLikedGameParam(
+            val param = GetLikedGameUseCase.Param(
                 gameId = gameID
             )
 
@@ -70,12 +68,9 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun setLovedGame(game: Games) {
+    fun setLovedGame(game: GameModel) {
         viewModelScope.launch {
-            val param = ToggleLikeGameUseCaseParam(
-                game = game
-            )
-
+            val param = ToggleLikedGameUseCase.Param(game = game)
             toggleLikedGameUseCase.execute(param).collectLatest {
                 when (it) {
                     Resource.Loading -> {

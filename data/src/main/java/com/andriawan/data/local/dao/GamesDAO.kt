@@ -1,23 +1,23 @@
 package com.andriawan.data.local.dao
 
 import androidx.room.*
-import com.andriawan.domain.models.Games
+import com.andriawan.domain.models.GameModel
 
 @Dao
 interface GamesDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGame(game: Games)
+    suspend fun insertGame(game: GameModel)
 
-    @Query("SELECT * FROM games")
-    suspend fun getAllGames(): List<Games>
+    @Query("SELECT * FROM GameModel")
+    suspend fun getAllGames(): List<GameModel>
 
-    @Query("SELECT * FROM games WHERE games.id = :gameId")
-    suspend fun getGame(gameId: Int): Games?
+    @Query("SELECT * FROM GameModel WHERE GameModel.id = :gameId")
+    suspend fun getGame(gameId: Int): GameModel?
 
-    @Query("DELETE FROM Games")
+    @Query("DELETE FROM GameModel")
     suspend fun deleteGames()
 
     @Delete
-    suspend fun deleteGame(game: Games)
+    suspend fun deleteGame(game: GameModel)
 }

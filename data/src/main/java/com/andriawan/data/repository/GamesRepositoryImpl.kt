@@ -2,12 +2,12 @@ package com.andriawan.data.repository
 
 import com.andriawan.data.local.dao.GamesDAO
 import com.andriawan.data.network.ApiService
-import com.andriawan.data.network.mappers.toDomain
+import com.andriawan.data.network.models.GamesDTO
+import com.andriawan.data.network.models.responses.GamesResponse
 import com.andriawan.data.network.util.safeApiRequest
-import com.andriawan.domain.models.Games
+import com.andriawan.domain.models.GameModel
 import com.andriawan.domain.repository.GamesRepository
 import timber.log.Timber
-import java.lang.Exception
 import javax.inject.Inject
 
 class GamesRepositoryImpl @Inject constructor(
@@ -15,17 +15,17 @@ class GamesRepositoryImpl @Inject constructor(
     private val gamesDAO: GamesDAO
 ) : GamesRepository {
 
-    override suspend fun getAllGames(page: Int, ordering: String): List<Games> {
+    override suspend fun getAllGames(page: Int, ordering: String): List<GameModel> {
         val response = safeApiRequest(apiService.getGames(page = page, ordering = ordering))
-        return response?.toDomain() ?: emptyList()
+        return GamesResponse.toModel(response?.results)
     }
 
-    override suspend fun getGame(id: String): Games? {
+    override suspend fun getGame(id: String): GameModel {
         val response = safeApiRequest(apiService.getGame(id = id))
-        return response?.toDomain()
+        return GamesDTO.toModel(response)
     }
 
-    override suspend fun getLikedGames(): List<Games> {
+    override suspend fun getLikedGames(): List<GameModel> {
         return try {
             val games = gamesDAO.getAllGames()
             games
@@ -35,7 +35,7 @@ class GamesRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getLikedGame(gameID: Int): Games? {
+    override suspend fun getLikedGame(gameID: Int): GameModel? {
         return try {
             val games = gamesDAO.getGame(gameID)
             games
@@ -45,7 +45,7 @@ class GamesRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addLikeGame(game: Games): Boolean {
+    override suspend fun addLikeGame(game: GameModel): Boolean {
         return try {
             gamesDAO.insertGame(game)
             true
@@ -55,7 +55,7 @@ class GamesRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteLikedGame(game: Games): Boolean {
+    override suspend fun deleteLikedGame(game: GameModel): Boolean {
         return try {
             gamesDAO.deleteGame(game)
             true

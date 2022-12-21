@@ -49,36 +49,9 @@ android {
 }
 
 dependencies {
-    // AndroidX
-    implementation(AndroidX.CORE_KTX)
-    implementation(AndroidX.LIFECYCLE)
-    implementation(AndroidX.LIFECYCLE_VIEW_MODEL)
-
-    // Compose
-    implementation(platform(Compose.COMPOSE_BOM))
-    implementation(Compose.COMPOSE_ACTIVITY)
-    implementation(Compose.COMPOSE_UI)
-    implementation(Compose.COMPOSE_MATERIAL)
-    implementation(Compose.COMPOSE_TOOLING_PREVIEW)
-    implementation(Compose.COMPOSE_LIFECYCLE)
-    implementation(Compose.COMPOSE_NAVIGATION)
-    debugImplementation(platform(Compose.COMPOSE_BOM))
-    debugImplementation(Compose.COMPOSE_TOOLING)
-    debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
-
-    // Local Testing
-    testImplementation(Test.JUNIT)
-    testImplementation(Hilt.HILT_ANDROID_TESTING)
-    kaptTest(Hilt.HILT_COMPILER)
-
-    // Instrumentation Testing
-    androidTestImplementation(platform(Compose.COMPOSE_BOM))
-    androidTestImplementation(Test.JUNIT_EXT)
-    androidTestImplementation(Test.ESPRESSO)
-    androidTestImplementation(Compose.COMPOSE_UI_TEST)
-    androidTestImplementation(Hilt.HILT_ANDROID_TESTING)
-    kaptAndroidTest(Hilt.HILT_COMPILER)
-
+    getCommonDependencies()
+    getComposeDependencies()
+    getCommonTestingDependencies()
     // Detekt autoCorrect
     detektPlugins(Detekt.DETEKT_AUTO_CORRECT)
 }

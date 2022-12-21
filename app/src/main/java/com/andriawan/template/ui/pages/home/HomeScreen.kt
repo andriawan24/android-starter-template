@@ -21,7 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.andriawan.common.navigation.Routes
 import com.andriawan.common.navigation.navigateWithParam
 import com.andriawan.common_ui.TemplateTheme
-import com.andriawan.domain.models.Games
+import com.andriawan.domain.models.GameModel
 import com.andriawan.template.R
 import com.andriawan.template.ui.components.GameList
 import com.andriawan.template.ui.components.GamesShimmer
@@ -51,7 +51,7 @@ fun HomeScreen(
 @Composable
 fun MainHomeScreen(
     navController: NavHostController,
-    games: List<Games>?,
+    games: List<GameModel>?,
     isLoading: Boolean,
     checkLoadMore: (Int) -> Unit
 ) {

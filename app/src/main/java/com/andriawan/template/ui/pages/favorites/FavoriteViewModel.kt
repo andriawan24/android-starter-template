@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andriawan.common.Resource
-import com.andriawan.domain.use_cases.GetLikedGamesParam
 import com.andriawan.domain.use_cases.GetLikedGamesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -23,7 +22,7 @@ class FavoriteViewModel @Inject constructor(
 
     fun initData() {
         viewModelScope.launch {
-            val params = GetLikedGamesParam()
+            val params = GetLikedGamesUseCase.Param
             getLikedGamesUseCase.execute(params).collectLatest {
                 when (it) {
                     Resource.Loading -> {

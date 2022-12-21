@@ -31,7 +31,7 @@ object Compose {
     const val COMPOSE_UI_TEST = "androidx.compose.ui:ui-test-junit4"
     const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose:$NAV_VERSION"
     const val COMPOSE_LIFECYCLE = "androidx.compose.runtime:runtime-livedata"
-    const val COMPOSE_HILT = "androidx.hilt:hilt-navigation-compose:$HILT_NAVIGATION_VERSION"
+    const val COMPOSE_HILT_NAVIGATION = "androidx.hilt:hilt-navigation-compose:$HILT_NAVIGATION_VERSION"
 }
 
 object Room {
@@ -63,9 +63,12 @@ object Test {
     private const val JUNIT_VERSION = "4.13.2"
     private const val JUNIT_EXT_VERSION = "1.1.4"
     private const val ESPRESSO_VERSION = "3.5.0"
+    private const val IO_MOCK_VERSION = "1.13.3"
+
     const val JUNIT = "junit:junit:$JUNIT_VERSION"
     const val JUNIT_EXT = "androidx.test.ext:junit:$JUNIT_EXT_VERSION"
     const val ESPRESSO = "androidx.test.espresso:espresso-core:$ESPRESSO_VERSION"
+    const val IO_MOCK = "io.mockk:mockk:$IO_MOCK_VERSION"
 }
 
 object Detekt {

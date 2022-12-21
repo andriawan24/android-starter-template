@@ -30,7 +30,6 @@ class ErrorHandleImpl: ErrorHandler {
             }
 
             else -> {
-                Timber.e(e)
                 ErrorEntity.UnknownException(
                     Throwable(
                         message = "Unknown error"

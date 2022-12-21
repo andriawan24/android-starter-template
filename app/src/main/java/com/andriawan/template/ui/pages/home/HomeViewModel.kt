@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andriawan.common.Resource
-import com.andriawan.domain.use_cases.GetGamesParam
 import com.andriawan.domain.use_cases.GetGamesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -42,7 +41,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getData() {
         viewModelScope.launch {
-            val param = GetGamesParam(page = homeState.currentPage)
+            val param = GetGamesUseCase.Param(page = homeState.currentPage)
             getGamesUseCase.execute(param).collectLatest {
                 when (it) {
                     Resource.Loading -> {

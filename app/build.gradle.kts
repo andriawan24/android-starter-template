@@ -73,61 +73,12 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":common-ui"))
 
-    // AndroidX
-    implementation(AndroidX.CORE_KTX)
-    implementation(AndroidX.LIFECYCLE)
-    implementation(AndroidX.LIFECYCLE_VIEW_MODEL)
-
-    // Retrofit
-    implementation(Retrofit.RETROFIT2)
-    implementation(Retrofit.GSON_CONVERTER)
-
-    // OKHTTP3 Logging
-    implementation(OKHttp3.LOGGING_INTERCEPTOR)
-
-    // Compose
-    implementation(platform(Compose.COMPOSE_BOM))
-    implementation(Compose.COMPOSE_ACTIVITY)
-    implementation(Compose.COMPOSE_UI)
-    implementation(Compose.COMPOSE_MATERIAL)
-    implementation(Compose.COMPOSE_TOOLING_PREVIEW)
-    implementation(Compose.COMPOSE_LIFECYCLE)
-    implementation(Compose.COMPOSE_NAVIGATION)
-    implementation(Compose.COMPOSE_HILT)
-    debugImplementation(platform(Compose.COMPOSE_BOM))
-    debugImplementation(Compose.COMPOSE_TOOLING)
-    debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
-
-    // Timber Logging
-    implementation(Log.TIMBER)
-
-    // Hilt
-    implementation(Hilt.HILT_ANDROID)
-    kapt(Hilt.HILT_COMPILER)
-
-    // Coil KT
-    implementation(Coil.COIL_KT)
-
-    // Room Database
-    implementation(Room.RUNTIME)
-    kapt(Room.COMPILER)
-    implementation(Room.ROOM_KTX)
-
-    // Local Testing
-    testImplementation(Test.JUNIT)
-    testImplementation(Hilt.HILT_ANDROID_TESTING)
-    testImplementation(Room.ROOM_TESTING)
-    kaptTest(Hilt.HILT_COMPILER)
-    testImplementation("io.mockk:mockk:1.13.3")
-
-    // Instrumentation Testing
-    androidTestImplementation(platform(Compose.COMPOSE_BOM))
-    androidTestImplementation(Test.JUNIT_EXT)
-    androidTestImplementation(Test.ESPRESSO)
-    androidTestImplementation(Compose.COMPOSE_UI_TEST)
-    androidTestImplementation(Hilt.HILT_ANDROID_TESTING)
-    androidTestImplementation(Room.ROOM_TESTING)
-    kaptAndroidTest(Hilt.HILT_COMPILER)
+    getCommonDependencies()
+    getComposeDependencies()
+    getNetworkDependencies()
+    getHiltDependencies()
+    getDatabaseDependencies()
+    getCommonTestingDependencies()
 
     // Detekt autoCorrect
     detektPlugins(Detekt.DETEKT_AUTO_CORRECT)

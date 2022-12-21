@@ -8,15 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,10 +26,9 @@ import androidx.navigation.compose.rememberNavController
 import com.andriawan.common.navigation.Routes
 import com.andriawan.common.navigation.navigateWithParam
 import com.andriawan.common_ui.TemplateTheme
-import com.andriawan.domain.models.Games
+import com.andriawan.domain.models.GameModel
 import com.andriawan.template.ui.components.GameList
 import com.andriawan.template.ui.components.GamesShimmer
-import com.andriawan.template.ui.pages.home.MainHomeScreen
 
 @ExperimentalFoundationApi
 @Composable
@@ -73,7 +68,7 @@ fun FavoriteScreen(
 @Composable
 fun MainFavoriteScreen(
     isLoading: Boolean,
-    items: List<Games>?,
+    items: List<GameModel>?,
     navHostController: NavHostController
 ) {
     Column {

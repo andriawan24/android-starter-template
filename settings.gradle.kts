@@ -1,14 +1,4 @@
 pluginManagement {
-    resolutionStrategy {
-        eachPlugin {
-            when (requested.id.id) {
-                "dagger.hilt.android.plugin" -> {
-                    useModule("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
-                }
-            }
-        }
-    }
-
     repositories {
         gradlePluginPortal()
         google()

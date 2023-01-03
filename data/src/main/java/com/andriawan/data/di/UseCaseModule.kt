@@ -1,9 +1,8 @@
 package com.andriawan.data.di
 
 import com.andriawan.common.error.ErrorHandler
-import com.andriawan.data.use_cases.*
 import com.andriawan.domain.repository.GamesRepository
-import com.andriawan.domain.use_cases.*
+import com.andriawan.domain.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +19,7 @@ object UseCaseModule {
         gamesRepository: GamesRepository,
         errorHandler: ErrorHandler
     ): GetGamesUseCase {
-        return GetGamesUseCaseImpl(gamesRepository, errorHandler)
+        return GetGamesUseCase(gamesRepository, errorHandler)
     }
 
     @Provides
@@ -28,34 +27,26 @@ object UseCaseModule {
     fun providesGetGameUseCase(
         gamesRepository: GamesRepository,
         errorHandler: ErrorHandler
-    ): GetGameUseCase {
-        return GetGameUseCaseImpl(gamesRepository, errorHandler)
-    }
+    ): GetGameUseCase = GetGameUseCase(gamesRepository, errorHandler)
 
     @Provides
     @Singleton
     fun providesAddLikeGameUseCase(
         gamesRepository: GamesRepository,
         errorHandler: ErrorHandler
-    ): ToggleLikedGameUseCase {
-        return ToggleLikeGameUseCaseImpl(gamesRepository, errorHandler)
-    }
+    ): ToggleLikedGameUseCase = ToggleLikedGameUseCase(gamesRepository, errorHandler)
 
     @Provides
     @Singleton
     fun providesGetLikedGameUseCase(
         gamesRepository: GamesRepository,
         errorHandler: ErrorHandler
-    ): GetLikedGameUseCase {
-        return GetLikedGameUseCaseImpl(gamesRepository, errorHandler)
-    }
+    ): GetLikedGameUseCase = GetLikedGameUseCase(gamesRepository, errorHandler)
 
     @Provides
     @Singleton
     fun providesGetLikedGamesUseCase(
         gamesRepository: GamesRepository,
         errorHandler: ErrorHandler
-    ): GetLikedGamesUseCase {
-        return GetLikedGamesUseCaseImpl(gamesRepository, errorHandler)
-    }
+    ): GetLikedGamesUseCase = GetLikedGamesUseCase(gamesRepository, errorHandler)
 }

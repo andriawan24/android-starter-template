@@ -1,12 +1,12 @@
 package com.andriawan.domain.repository
 
-import com.andriawan.domain.models.Games
+import com.andriawan.domain.models.GameModel
 
 interface GamesRepository {
-    suspend fun getAllGames(page: Int, ordering: String): List<Games>
-    suspend fun getGame(id: String): Games?
-    suspend fun getLikedGames(): List<Games>
-    suspend fun getLikedGame(gameID: Int): Games?
-    suspend fun deleteLikedGame(game: Games): Boolean
-    suspend fun addLikeGame(game: Games): Boolean
+    suspend fun getAllGames(page: Int, ordering: String): List<GameModel>
+    suspend fun getGame(id: String): GameModel
+    suspend fun getLikedGames(): List<GameModel>
+    suspend fun getLikedGame(gameID: Int): GameModel?
+    suspend fun deleteLikedGame(game: GameModel): Boolean
+    suspend fun addLikeGame(game: GameModel): Boolean
 }

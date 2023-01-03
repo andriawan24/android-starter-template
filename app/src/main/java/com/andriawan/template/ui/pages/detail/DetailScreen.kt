@@ -23,9 +23,9 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.andriawan.common_ui.TemplateTheme
-import com.andriawan.domain.models.Games
+import com.andriawan.domain.models.GameModel
 import com.andriawan.template.ui.components.GameRating
-import com.andriawan.template.ui.components.LikedButton
+import com.andriawan.template.ui.components.LikeButton
 
 @Composable
 fun DetailScreen(
@@ -33,7 +33,7 @@ fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     gameId: String
 ) {
-    val state = viewModel.detailState.value
+    val state = viewModel.uiState
     LaunchedEffect(Unit) {
         viewModel.getGame(gameId)
     }
@@ -42,13 +42,9 @@ fun DetailScreen(
         state.game != null -> {
             MainDetailPage(
                 game = state.game,
-                isLoved = state.isLoved,
-                onBackClicked = {
-                    navController.navigateUp()
-                },
-                onLoveClicked = {
-                    viewModel.setLovedGame(it)
-                }
+                isFavoriteGame = state.isFavoriteGame,
+                onBackClicked = { navController.navigateUp() },
+                onLoveClicked = { viewModel.setLovedGame(it) }
             )
         }
 
@@ -74,16 +70,16 @@ fun DetailScreen(
 
 @Composable
 fun MainDetailPage(
-    game: Games,
-    isLoved: Boolean,
+    game: GameModel,
+    isFavoriteGame: Boolean,
     onBackClicked: () -> Unit,
-    onLoveClicked: (game: Games) -> Unit
+    onLoveClicked: (game: GameModel) -> Unit
 ) {
     Column {
         DetailHeader(
             game = game,
             onBackClicked = onBackClicked,
-            isLoved = isLoved,
+            isLoved = isFavoriteGame,
             onLoveClicked = {
                 onLoveClicked.invoke(game)
             }
@@ -94,25 +90,24 @@ fun MainDetailPage(
 
 @Composable
 fun DetailHeader(
-    game: Games,
+    game: GameModel,
     isLoved: Boolean,
     onBackClicked: () -> Unit,
     onLoveClicked: () -> Unit
 ) {
     Row(
-        modifier = Modifier
-            .padding(18.dp),
+        modifier = Modifier.padding(18.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         BackButton(onBackClicked = onBackClicked)
         Spacer(modifier = Modifier.width(24.dp))
         AppBarTitle(
-            name = game.name ?: "",
-            rating = game.rating ?: 0.0,
+            name = game.name,
+            rating = game.rating,
             modifier = Modifier.weight(1F)
         )
         Spacer(modifier = Modifier.width(24.dp))
-        LikedButton(
+        LikeButton(
             isLiked = isLoved,
             onLoveClicked = onLoveClicked
         )
@@ -120,10 +115,13 @@ fun DetailHeader(
 }
 
 @Composable
-fun BackButton(onBackClicked: () -> Unit) {
+fun BackButton(
+    onBackClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     IconButton(
-        onClick = { onBackClicked() },
-        modifier = Modifier
+        onClick = onBackClicked,
+        modifier = modifier
             .clip(CircleShape)
             .background(Color.White)
             .size(30.dp)
@@ -137,7 +135,11 @@ fun BackButton(onBackClicked: () -> Unit) {
 }
 
 @Composable
-fun AppBarTitle(modifier: Modifier = Modifier, name: String, rating: Double) {
+fun AppBarTitle(
+    modifier: Modifier = Modifier,
+    name: String,
+    rating: Double
+) {
     Column(modifier = modifier) {
         Text(
             text = name,
@@ -149,23 +151,18 @@ fun AppBarTitle(modifier: Modifier = Modifier, name: String, rating: Double) {
 }
 
 @Composable
-fun DetailBody(game: Games) {
+fun DetailBody(game: GameModel) {
     val scrollState = rememberScrollState()
-
-    Column(
-        modifier = Modifier
-            .verticalScroll(scrollState)
-    ) {
-        DetailPoster(image = game.background_image ?: "")
-        DescriptionGame(description = game.description_raw.toString())
+    Column(modifier = Modifier.verticalScroll(scrollState)) {
+        DetailPoster(image = game.backgroundImage)
+        DescriptionGame(description = game.descriptionRaw)
     }
 }
 
 @Composable
 fun DetailPoster(image: String) {
     Card(
-        modifier = Modifier
-            .padding(18.dp),
+        modifier = Modifier.padding(18.dp),
         shape = MaterialTheme.shapes.medium
     ) {
         AsyncImage(
@@ -183,10 +180,9 @@ fun DetailPoster(image: String) {
 }
 
 @Composable
-fun DescriptionGame(description: String) {
+fun DescriptionGame(description: String, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
-            .padding(PaddingValues(horizontal = 18.dp))
+        modifier = modifier.padding(PaddingValues(horizontal = 18.dp))
     ) {
         Text(text = description)
     }

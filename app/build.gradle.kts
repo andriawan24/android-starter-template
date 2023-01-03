@@ -44,12 +44,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildFeatures {
@@ -57,7 +57,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Compose.COMPOSE_VERSION
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 
     packagingOptions {
@@ -73,58 +73,12 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":common-ui"))
 
-    // AndroidX
-    implementation(AndroidX.CORE_KTX)
-    implementation(AndroidX.LIFECYCLE)
-    implementation(AndroidX.LIFECYCLE_VIEW_MODEL)
-
-    // Retrofit
-    implementation(Retrofit.RETROFIT)
-    implementation(Retrofit.GSON_CONVERTER)
-
-    // OKHTTP3 Logging
-    implementation(OKHttp3.LOGGING_INTERCEPTOR)
-
-    // Compose
-    implementation(Compose.COMPOSE_ACTIVITY)
-    implementation(Compose.COMPOSE_UI)
-    implementation(Compose.COMPOSE_MATERIAL)
-    implementation(Compose.COMPOSE_TOOLING_PREVIEW)
-    implementation(Compose.COMPOSE_LIFECYCLE)
-    implementation(Compose.COMPOSE_NAVIGATION)
-    implementation(Compose.COMPOSE_HILT)
-    debugImplementation(Compose.COMPOSE_TOOLING)
-    debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
-
-    // Timber Logging
-    implementation(Log.TIMBER)
-
-    // Hilt
-    implementation(Hilt.HILT_ANDROID)
-    kapt(Hilt.HILT_COMPILER)
-
-    // Coil KT
-    implementation(Coil.COIL_KT)
-
-    // Room Database
-    implementation(Room.RUNTIME)
-    kapt(Room.COMPILER)
-    implementation(Room.ROOM_KTX)
-
-    // Local Testing
-    testImplementation(Test.JUNIT)
-    testImplementation(Hilt.HILT_ANDROID_TESTING)
-    testImplementation(Room.ROOM_TESTING)
-    kaptTest(Hilt.HILT_COMPILER)
-    testImplementation("io.mockk:mockk:1.12.4")
-
-    // Instrumentation Testing
-    androidTestImplementation(Test.JUNIT_EXT)
-    androidTestImplementation(Test.ESPRESSO)
-    androidTestImplementation(Compose.COMPOSE_UI_TEST)
-    androidTestImplementation(Hilt.HILT_ANDROID_TESTING)
-    androidTestImplementation(Room.ROOM_TESTING)
-    kaptAndroidTest(Hilt.HILT_COMPILER)
+    getCommonDependencies()
+    getComposeDependencies()
+    getNetworkDependencies()
+    getHiltDependencies()
+    getDatabaseDependencies()
+    getCommonTestingDependencies()
 
     // Detekt autoCorrect
     detektPlugins(Detekt.DETEKT_AUTO_CORRECT)

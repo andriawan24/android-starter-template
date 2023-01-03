@@ -2,14 +2,11 @@ package com.andriawan.template.ui.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.LocalOverScrollConfiguration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -18,20 +15,17 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.andriawan.common_ui.SubtitleColor
 import com.andriawan.common_ui.TemplateTheme
 
-@ExperimentalFoundationApi
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun GamesShimmer() {
-    val items = (1..10).toList()
-    CompositionLocalProvider(LocalOverScrollConfiguration provides null) {
+fun GamesShimmer(modifier: Modifier = Modifier, size: Int = 10) {
+    val items = (1..size).toList()
+    CompositionLocalProvider(LocalOverscrollConfiguration provides null) {
         LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
             items(
@@ -42,7 +36,6 @@ fun GamesShimmer() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(180.dp)
-                        .padding(PaddingValues(horizontal = 12.dp))
                         .setShimmer(true)
                 )
             }
@@ -50,10 +43,7 @@ fun GamesShimmer() {
     }
 }
 
-private fun Modifier.setShimmer(
-    isShimmer: Boolean
-): Modifier = composed {
-
+private fun Modifier.setShimmer(isShimmer: Boolean): Modifier = composed {
     if (isShimmer) {
         val shimmerColorState = listOf(
             Color.LightGray.copy(alpha = 0.7f),
@@ -84,16 +74,10 @@ private fun Modifier.setShimmer(
 }
 
 @ExperimentalFoundationApi
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun GamesShimmerPreview() {
     TemplateTheme {
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colors.background)
-        ) {
-            GamesShimmer()
-        }
+        GamesShimmer()
     }
 }

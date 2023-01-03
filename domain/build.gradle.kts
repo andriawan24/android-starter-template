@@ -26,28 +26,23 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
 dependencies {
     implementation(project(":common"))
 
-    // AndroidX
-    implementation(AndroidX.CORE_KTX)
-    implementation(AndroidX.LIFECYCLE)
+    getCommonDependencies()
 
     // Retrofit
-    implementation(Retrofit.RETROFIT)
+    implementation(Retrofit.RETROFIT2)
     implementation(Retrofit.GSON_CONVERTER)
-
-    // Timber Logging
-    implementation(Log.TIMBER)
 
     // Hilt
     implementation(Hilt.HILT_ANDROID)
@@ -63,9 +58,10 @@ dependencies {
     testImplementation(Hilt.HILT_ANDROID_TESTING)
     testImplementation(Room.ROOM_TESTING)
     kaptTest(Hilt.HILT_COMPILER)
-    testImplementation("io.mockk:mockk:1.12.4")
+    testImplementation("io.mockk:mockk:1.13.3")
 
     // Instrumentation Testing
+    androidTestImplementation(platform(Compose.COMPOSE_BOM))
     androidTestImplementation(Test.JUNIT_EXT)
     androidTestImplementation(Test.ESPRESSO)
     androidTestImplementation(Compose.COMPOSE_UI_TEST)

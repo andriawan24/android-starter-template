@@ -52,10 +52,4 @@ object NetworkModule {
     ): ApiService {
         return retrofit.create(ApiService::class.java)
     }
-
-    @Provides
-    @Singleton
-    fun providesErrorHandler(): ErrorHandler {
-        return ErrorHandleImpl()
-    }
 }

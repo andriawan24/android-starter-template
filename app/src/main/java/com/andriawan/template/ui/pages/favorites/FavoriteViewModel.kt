@@ -6,8 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andriawan.common.Resource
-import com.andriawan.domain.use_cases.GetLikedGamesParam
-import com.andriawan.domain.use_cases.GetLikedGamesUseCase
+import com.andriawan.domain.usecases.GetLikedGamesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -18,18 +17,16 @@ class FavoriteViewModel @Inject constructor(
     private val getLikedGamesUseCase: GetLikedGamesUseCase
 ) : ViewModel() {
 
-    var state: FavoriteState by mutableStateOf(FavoriteState())
+    var state by mutableStateOf(FavoriteUiState())
         private set
 
     fun initData() {
         viewModelScope.launch {
-            val params = GetLikedGamesParam()
+            val params = GetLikedGamesUseCase.Param
             getLikedGamesUseCase.execute(params).collectLatest {
                 when (it) {
                     Resource.Loading -> {
-                        state = state.copy(
-                            isLoading = true
-                        )
+                        state = state.copy(isLoading = true)
                     }
 
                     is Resource.Success -> {
@@ -41,7 +38,7 @@ class FavoriteViewModel @Inject constructor(
 
                     is Resource.Error -> {
                         state = state.copy(
-                            errMessage = it.error.originalException.localizedMessage,
+                            errMessage = it.errorMessage,
                             isLoading = false
                         )
                     }

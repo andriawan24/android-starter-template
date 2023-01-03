@@ -25,12 +25,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildFeatures {
@@ -38,7 +38,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Compose.COMPOSE_VERSION
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 
     packagingOptions {
@@ -49,33 +49,9 @@ android {
 }
 
 dependencies {
-    // AndroidX
-    implementation(AndroidX.CORE_KTX)
-    implementation(AndroidX.LIFECYCLE)
-    implementation(AndroidX.LIFECYCLE_VIEW_MODEL)
-
-    // Compose
-    implementation(Compose.COMPOSE_ACTIVITY)
-    implementation(Compose.COMPOSE_UI)
-    implementation(Compose.COMPOSE_MATERIAL)
-    implementation(Compose.COMPOSE_TOOLING_PREVIEW)
-    implementation(Compose.COMPOSE_LIFECYCLE)
-    implementation(Compose.COMPOSE_NAVIGATION)
-    debugImplementation(Compose.COMPOSE_TOOLING)
-    debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
-
-    // Local Testing
-    testImplementation(Test.JUNIT)
-    testImplementation(Hilt.HILT_ANDROID_TESTING)
-    kaptTest(Hilt.HILT_COMPILER)
-
-    // Instrumentation Testing
-    androidTestImplementation(Test.JUNIT_EXT)
-    androidTestImplementation(Test.ESPRESSO)
-    androidTestImplementation(Compose.COMPOSE_UI_TEST)
-    androidTestImplementation(Hilt.HILT_ANDROID_TESTING)
-    kaptAndroidTest(Hilt.HILT_COMPILER)
-
+    getCommonDependencies()
+    getComposeDependencies()
+    getCommonTestingDependencies()
     // Detekt autoCorrect
     detektPlugins(Detekt.DETEKT_AUTO_CORRECT)
 }

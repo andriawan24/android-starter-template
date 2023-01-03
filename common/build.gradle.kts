@@ -25,32 +25,24 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
 dependencies {
-    implementation(AndroidX.CORE_KTX)
+    getCommonDependencies()
+    getComposeDependencies()
+
     implementation(Compose.COMPOSE_MATERIAL)
+
     testImplementation(Test.JUNIT)
     androidTestImplementation(Test.JUNIT_EXT)
     androidTestImplementation(Test.ESPRESSO)
-
-    // Compose
-    implementation(Compose.COMPOSE_ACTIVITY)
-    implementation(Compose.COMPOSE_UI)
-    implementation(Compose.COMPOSE_MATERIAL)
-    implementation(Compose.COMPOSE_TOOLING_PREVIEW)
-    implementation(Compose.COMPOSE_LIFECYCLE)
-    implementation(Compose.COMPOSE_NAVIGATION)
-    implementation(Compose.COMPOSE_HILT)
-    debugImplementation(Compose.COMPOSE_TOOLING)
-    debugImplementation(Compose.COMPOSE_TEST_MANIFEST)
 
     // Detekt autoCorrect
     detektPlugins(Detekt.DETEKT_AUTO_CORRECT)

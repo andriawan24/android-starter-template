@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andriawan.common.Resource
-import com.andriawan.domain.use_cases.GetGamesUseCase
+import com.andriawan.domain.usecases.GetGamesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -17,23 +17,8 @@ class HomeViewModel @Inject constructor(
     private val getGamesUseCase: GetGamesUseCase
 ) : ViewModel() {
 
-    var homeState by mutableStateOf(HomeState())
+    var uiState by mutableStateOf(HomeState())
         private set
-
-//    private val paginator = DefaultPaginator<Int, Games>(
-//        initialKey = homeState.currentPage,
-//        onLoadUpdated = {
-//            homeState = homeState.copy(
-//                isLoading = true
-//            )
-//        },
-//        onRequest = { page ->
-//            val param = GetGamesParam(
-//                page = page
-//            )
-//            getGamesUseCase.execute(param)
-//        }
-//    )
 
     init {
         getData()
@@ -41,25 +26,27 @@ class HomeViewModel @Inject constructor(
 
     private fun getData() {
         viewModelScope.launch {
-            val param = GetGamesUseCase.Param(page = homeState.currentPage)
+            val param = GetGamesUseCase.Param(page = uiState.currentPage)
             getGamesUseCase.execute(param).collectLatest {
                 when (it) {
                     Resource.Loading -> {
-                        homeState = homeState.copy(isLoading = true)
+                        uiState = uiState.copy(
+                            isLoading = true
+                        )
                     }
 
                     is Resource.Success -> {
-                        homeState = homeState.copy(
-                            list = homeState.list.orEmpty() + it.data.orEmpty(),
-                            currentPage = homeState.currentPage + 1,
+                        uiState = uiState.copy(
+                            list = uiState.list.orEmpty() + it.data.orEmpty(),
+                            currentPage = uiState.currentPage + 1,
                             endReach = it.data.isNullOrEmpty(),
                             isLoading = false
                         )
                     }
 
                     is Resource.Error -> {
-                        homeState = homeState.copy(
-                            errorMessage = it.error.originalException.message
+                        uiState = uiState.copy(
+                            errorMessage = it.errorMessage
                         )
                     }
                 }
@@ -67,9 +54,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun checkOverScrolled(index: Int) {
-        if (index == homeState.list.orEmpty().size - 1 && homeState.list.orEmpty()
-                .isNotEmpty() && !homeState.endReach
+    fun checkBottomScrolled(index: Int) {
+        if (index == uiState.list.orEmpty().size - 1 &&
+            !uiState.list.isNullOrEmpty() && !uiState.endReach
         ) {
             getData()
         }

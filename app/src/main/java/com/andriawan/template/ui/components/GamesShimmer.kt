@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.andriawan.common_ui.TemplateTheme
 
-@ExperimentalFoundationApi
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun GamesShimmer(modifier: Modifier = Modifier, size: Int = 10) {
     val items = (1..size).toList()

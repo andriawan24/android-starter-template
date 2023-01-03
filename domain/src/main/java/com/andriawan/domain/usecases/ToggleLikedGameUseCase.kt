@@ -1,4 +1,4 @@
-package com.andriawan.domain.use_cases
+package com.andriawan.domain.usecases
 
 import com.andriawan.common.Resource
 import com.andriawan.common.error.ErrorHandler
@@ -9,30 +9,29 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import java.lang.Exception
 
-class GetGamesUseCase(
+class ToggleLikedGameUseCase(
     private val gamesRepository: GamesRepository,
     private val errorHandler: ErrorHandler
-) : FlowUseCase<GetGamesUseCase.Param, List<GameModel>> {
+) : FlowUseCase<ToggleLikedGameUseCase.Param, Boolean> {
 
-    override fun execute(params: Param): Flow<Resource<List<GameModel>>> = flow {
+    override fun execute(params: Param): Flow<Resource<Boolean>> = flow {
         emit(Resource.Loading)
         try {
-            val gameList =
-                gamesRepository.getAllGames(page = params.page, ordering = params.ordering)
-            gameList.forEach {
-                val isAdded = gamesRepository.getLikedGame(it.id)
-                if (isAdded != null) gamesRepository.addLikeGame(it)
+            val game = gamesRepository.getLikedGame(params.game.id)
+            if (game == null) {
+                val likedGame = gamesRepository.addLikeGame(game = params.game)
+                emit(Resource.Success(likedGame))
+            } else {
+                gamesRepository.deleteLikedGame(game = params.game)
+                emit(Resource.Success(false))
             }
-            emit(Resource.Success(data = gameList))
         } catch (e: Exception) {
             emit(Resource.Error(errorHandler.getError(e)))
         }
     }.flowOn(Dispatchers.IO)
 
     data class Param(
-        val page: Int = 1,
-        val ordering: String = "-rating"
+        val game: GameModel
     )
 }

@@ -20,14 +20,12 @@ import com.andriawan.common_ui.SubtitleColor
 import com.andriawan.common_ui.TemplateTheme
 import com.andriawan.domain.models.GameModel
 
-@ExperimentalFoundationApi
 @Composable
-fun GameList(
+fun GameCard(
     game: GameModel,
     onGameClicked: () -> Unit
 ) {
     var enable by remember { mutableStateOf(true) }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,10 +39,10 @@ fun GameList(
                 enabled = enable
             )
     ) {
-        ImageGame(game = game)
+        GameImage(game = game)
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = game.name ?: "No Name",
+            text = game.name,
             style = MaterialTheme.typography.subtitle1.copy(
                 color = MaterialTheme.colors.onBackground
             ),
@@ -52,7 +50,7 @@ fun GameList(
             overflow = TextOverflow.Ellipsis
         )
         Text(
-            text = DateHelper.getYearFromDateString(game.released.orEmpty()).orEmpty(),
+            text = DateHelper.getYearFromDateString(game.released).orEmpty(),
             style = MaterialTheme.typography.subtitle2.copy(
                 color = SubtitleColor
             )
@@ -61,14 +59,9 @@ fun GameList(
 }
 
 @Composable
-fun ImageGame(game: GameModel) {
-    Card(
-        shape = MaterialTheme.shapes.medium
-    ) {
-        var isLoading by remember {
-            mutableStateOf(true)
-        }
-
+fun GameImage(game: GameModel, modifier: Modifier = Modifier) {
+    Card(shape = MaterialTheme.shapes.medium, modifier = modifier) {
+        var isLoading by remember { mutableStateOf(true) }
         Box {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -84,7 +77,6 @@ fun ImageGame(game: GameModel) {
                 onSuccess = { isLoading = false },
                 onError = { isLoading = false }
             )
-
             if (isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier
@@ -101,12 +93,11 @@ fun ImageGame(game: GameModel) {
 fun GameListPreview() {
     TemplateTheme {
         val gameList by remember { mutableStateOf(emptyList<GameModel>()) }
-
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            GameList(
+            GameCard(
                 game = gameList[0],
                 onGameClicked = { }
             )

@@ -1,11 +1,7 @@
 package com.andriawan.template.ui.pages.favorites
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
@@ -13,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,10 +24,9 @@ import com.andriawan.common.navigation.Routes
 import com.andriawan.common.navigation.navigateWithParam
 import com.andriawan.common_ui.TemplateTheme
 import com.andriawan.domain.models.GameModel
-import com.andriawan.template.ui.components.GameList
+import com.andriawan.template.ui.components.GameCard
 import com.andriawan.template.ui.components.GamesShimmer
 
-@ExperimentalFoundationApi
 @Composable
 fun FavoriteScreen(
     viewModel: FavoriteViewModel = hiltViewModel(),
@@ -38,7 +34,6 @@ fun FavoriteScreen(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
 ) {
     val state = viewModel.state
-
     DisposableEffect(lifecycleOwner) {
         val lifecycle = lifecycleOwner.lifecycle
         val observer = LifecycleEventObserver { _, event ->
@@ -46,7 +41,6 @@ fun FavoriteScreen(
                 viewModel.initData()
             }
         }
-
         lifecycle.addObserver(observer)
         onDispose {
             lifecycle.removeObserver(observer)
@@ -60,11 +54,19 @@ fun FavoriteScreen(
             isLoading = state.isLoading
         )
     } else {
-        Text(text = "${state.errMessage}")
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = state.errMessage,
+                style = MaterialTheme.typography.h6
+            )
+        }
     }
 }
 
-@ExperimentalFoundationApi
 @Composable
 fun MainFavoriteScreen(
     isLoading: Boolean,
@@ -72,24 +74,40 @@ fun MainFavoriteScreen(
     navHostController: NavHostController
 ) {
     Column {
-        if (items.isNullOrEmpty() && isLoading) {
-            GamesShimmer()
-        } else {
-            items?.let {
+        when {
+            isLoading -> {
+                GamesShimmer()
+            }
+
+            items.isNullOrEmpty() -> {
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "Data tidak tersedia",
+                        style = MaterialTheme.typography.h6
+                    )
+                }
+            }
+
+            else -> {
                 LazyColumn(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(18.dp),
+                    contentPadding = PaddingValues(top = 12.dp)
                 ) {
                     items(
-                        items = it,
+                        items = items,
                         key = { game -> game.id }
                     ) { game ->
-                        GameList(
+                        GameCard(
                             game = game,
                             onGameClicked = {
                                 navHostController.navigateWithParam(
                                     route = Routes.DETAIL_PAGE,
-                                    game.id.toString() // Game ID
+                                    game.id.toString()
                                 )
                             }
                         )
@@ -100,7 +118,6 @@ fun MainFavoriteScreen(
     }
 }
 
-@ExperimentalFoundationApi
 @Preview
 @Composable
 fun FavoritePagePreview() {
@@ -110,9 +127,7 @@ fun FavoritePagePreview() {
                 .fillMaxSize()
                 .background(MaterialTheme.colors.background)
         ) {
-            FavoriteScreen(
-                navHostController = rememberNavController()
-            )
+            FavoriteScreen(navHostController = rememberNavController())
         }
     }
 }

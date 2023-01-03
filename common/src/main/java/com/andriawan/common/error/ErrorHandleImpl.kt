@@ -1,40 +1,28 @@
 package com.andriawan.common.error
 
+import android.content.Context
+import com.andriawan.common.R
+import dagger.hilt.android.qualifiers.ApplicationContext
 import timber.log.Timber
 import java.io.IOException
-import java.lang.Exception
-import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
+import javax.inject.Inject
 
-class ErrorHandleImpl: ErrorHandler {
-    override fun getError(e: Exception): ErrorEntity {
+class ErrorHandleImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+) : ErrorHandler {
+
+    override fun getError(e: Exception): String {
         return when (e) {
-            is ApiException -> {
-                ErrorEntity.ApiException(e)
+            is IOException -> {
+                "Internet Error"
             }
-
             is TimeoutException -> {
-                ErrorEntity.NetworkException(
-                    Throwable(
-                        message = "Internet is slow"
-                    )
-                )
+                "Internet is slow"
             }
-
-            is UnknownHostException -> {
-                ErrorEntity.NetworkException(
-                    Throwable(
-                        message = "No internet"
-                    )
-                )
-            }
-
             else -> {
-                ErrorEntity.UnknownException(
-                    Throwable(
-                        message = "Unknown error"
-                    )
-                )
+                Timber.d(e.message.toString())
+                context.getString(R.string.common_unknown_error)
             }
         }
     }

@@ -13,15 +13,15 @@ object Retrofit {
 }
 
 object OKHttp3 {
-    private const val VERSION = "4.9.3"
+    private const val VERSION = "4.10.0"
     const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:$VERSION"
 }
 
 object Compose {
-    const val COMPOSE_BOM = "androidx.compose:compose-bom:2022.11.00"
     private const val COMPOSE_ACTIVITY_VERSION = "1.6.1"
     private const val NAV_VERSION = "2.5.3"
     private const val HILT_NAVIGATION_VERSION = "1.0.0"
+    const val COMPOSE_BOM = "androidx.compose:compose-bom:2022.12.00"
     const val COMPOSE_UI = "androidx.compose.ui:ui"
     const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose:$COMPOSE_ACTIVITY_VERSION"
     const val COMPOSE_MATERIAL = "androidx.compose.material:material"
@@ -48,7 +48,7 @@ object Log {
 }
 
 object Coil {
-    private const val COIL_VERSION = "2.1.0"
+    private const val COIL_VERSION = "2.2.2"
     const val COIL_KT = "io.coil-kt:coil-compose:$COIL_VERSION"
 }
 

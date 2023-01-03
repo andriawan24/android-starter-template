@@ -3,7 +3,6 @@ package com.andriawan.template
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -39,17 +38,16 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background,
                 ) {
                     val navController = rememberNavController()
-                    var visible by remember { mutableStateOf(true) }
+                    var bottomNavVisible by remember { mutableStateOf(true) }
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
-                    visible = when (navBackStackEntry?.destination?.route) {
+                    bottomNavVisible = when (navBackStackEntry?.destination?.route) {
                         Routes.LIKED_PAGE,
                         Routes.HOME_PAGE -> true
                         else -> false
                     }
-
                     Scaffold(
                         bottomBar = {
-                            AnimatedVisibility(visible = visible) {
+                            if (bottomNavVisible) {
                                 BottomAppBar(
                                     cutoutShape = CircleShape,
                                     backgroundColor = if (isSystemInDarkTheme()) DarkCardColor else CardColor

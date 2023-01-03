@@ -1,6 +1,5 @@
-package com.andriawan.domain.use_cases
+package com.andriawan.domain.usecases
 
-import com.andriawan.common.None
 import com.andriawan.common.Resource
 import com.andriawan.common.error.ErrorHandler
 import com.andriawan.domain.models.GameModel
@@ -10,22 +9,36 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import java.lang.Exception
 
-class GetLikedGamesUseCase(
+class GetGamesUseCase(
     private val gamesRepository: GamesRepository,
     private val errorHandler: ErrorHandler
-) : FlowUseCase<GetLikedGamesUseCase.Param, List<GameModel>> {
+) : FlowUseCase<GetGamesUseCase.Param, List<GameModel>> {
 
     override fun execute(params: Param): Flow<Resource<List<GameModel>>> = flow {
         emit(Resource.Loading)
-
         try {
-            val games = gamesRepository.getLikedGames()
-            emit(Resource.Success(games))
+            val gameList = gamesRepository.getAllGames(
+                page = params.page,
+                ordering = params.ordering
+            )
+
+            gameList.forEach {
+                val likedGame = gamesRepository.getLikedGame(it.id)
+                if (likedGame != null) {
+                    gamesRepository.addLikeGame(it)
+                }
+            }
+
+            emit(Resource.Success(data = gameList))
         } catch (e: Exception) {
             emit(Resource.Error(errorHandler.getError(e)))
         }
     }.flowOn(Dispatchers.IO)
 
-    object Param
+    data class Param(
+        val page: Int = 1,
+        val ordering: String = "-rating"
+    )
 }

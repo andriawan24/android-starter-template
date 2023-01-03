@@ -6,16 +6,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.andriawan.common_ui.TemplateTheme
 
 @Composable
-fun LikedButton(isLiked: Boolean, onLoveClicked: () -> Unit) {
-    IconButton(
-        onClick = {
-            onLoveClicked.invoke()
-        }
-    ) {
+fun LikeButton(isLiked: Boolean, onLoveClicked: () -> Unit, modifier: Modifier = Modifier) {
+    IconButton(onClick = onLoveClicked, modifier = modifier) {
         Icon(
             imageVector = if (isLiked) {
                 Icons.Default.Favorite
@@ -31,6 +28,6 @@ fun LikedButton(isLiked: Boolean, onLoveClicked: () -> Unit) {
 @Composable
 fun LikedButtonPreview() {
     TemplateTheme {
-        LikedButton(isLiked = true) { }
+        LikeButton(isLiked = true, onLoveClicked = {})
     }
 }

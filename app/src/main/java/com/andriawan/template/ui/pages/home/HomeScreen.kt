@@ -3,9 +3,7 @@ package com.andriawan.template.ui.pages.home
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.CircularProgressIndicator
@@ -23,7 +21,7 @@ import com.andriawan.common.navigation.navigateWithParam
 import com.andriawan.common_ui.TemplateTheme
 import com.andriawan.domain.models.GameModel
 import com.andriawan.template.R
-import com.andriawan.template.ui.components.GameList
+import com.andriawan.template.ui.components.GameCard
 import com.andriawan.template.ui.components.GamesShimmer
 import com.andriawan.template.ui.components.HomeHeader
 
@@ -33,14 +31,14 @@ fun HomeScreen(
     navController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val homeState = viewModel.homeState
+    val homeState = viewModel.uiState
 
     if (homeState.errorMessage == null) {
         MainHomeScreen(
             navController = navController,
             games = homeState.list,
             isLoading = homeState.isLoading,
-            checkLoadMore = { viewModel.checkOverScrolled(it) }
+            checkLoadMore = { viewModel.checkBottomScrolled(it) }
         )
     } else {
         Text(text = "${homeState.errorMessage}")
@@ -75,13 +73,12 @@ fun MainHomeScreen(
                         key = { _, game -> game.id }
                     ) { i, game ->
                         checkLoadMore(i)
-
-                        GameList(
+                        GameCard(
                             game = game,
                             onGameClicked = {
                                 navController.navigateWithParam(
                                     route = Routes.DETAIL_PAGE,
-                                    game.id.toString() // Game ID
+                                    game.id.toString()
                                 )
                             }
                         )
@@ -89,7 +86,14 @@ fun MainHomeScreen(
 
                     item {
                         if (isLoading && it.isNotEmpty()) {
-                            CircularProgressIndicator()
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 12.dp),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                CircularProgressIndicator()
+                            }
                         }
                     }
                 }

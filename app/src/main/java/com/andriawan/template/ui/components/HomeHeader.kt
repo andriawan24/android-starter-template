@@ -25,12 +25,13 @@ import com.andriawan.template.R
 fun HomeHeader(
     title: String,
     imageProfile: String,
-    haveNotification: Boolean
+    haveNotification: Boolean,
+    modifier: Modifier = Modifier
 ) {
     var isLoadingImage by remember { mutableStateOf(true) }
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 18.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -40,21 +41,19 @@ fun HomeHeader(
             style = MaterialTheme.typography.h5.copy(
                 fontWeight = FontWeight.Bold
             ),
-            modifier = Modifier
-                .weight(1F)
+            modifier = Modifier.weight(1F)
         )
         Spacer(modifier = Modifier.width(24.dp))
         Box {
             AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageProfile)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = null,
-                contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .size(50.dp)
                     .clip(CircleShape),
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(imageProfile)
+                    .crossfade(true).build(),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
                 onLoading = {
                     isLoadingImage = true
                 },
@@ -85,25 +84,8 @@ fun HomeHeader(
     }
 }
 
-@Preview(uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun HomeHeaderPreviewNightMode() {
-    TemplateTheme {
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colors.background)
-        ) {
-            HomeHeader(
-                title = stringResource(id = R.string.header_title),
-                imageProfile = "https://dummyimage.com/500x500/000/fff",
-                haveNotification = false
-            )
-        }
-    }
-}
-
-@Preview(uiMode = UI_MODE_NIGHT_NO)
+@Preview(uiMode = UI_MODE_NIGHT_NO, showBackground = true)
+@Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true, name = "Dark Mode")
 @Composable
 fun HomeHeaderPreview() {
     TemplateTheme {

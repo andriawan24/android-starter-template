@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_no_internet_error">No Internet</string>
+    <string name="common_unknown_error">Unknown error happens! Please restart your application</string>
+</resources>

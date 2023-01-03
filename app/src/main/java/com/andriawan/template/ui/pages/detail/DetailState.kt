@@ -6,5 +6,5 @@ data class DetailState(
     val isLoading: Boolean = false,
     val game: GameModel? = null,
     val message: String? = null,
-    val isLoved: Boolean = false
+    val isFavoriteGame: Boolean = false
 )

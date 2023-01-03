@@ -2,7 +2,7 @@ package com.andriawan.data.di
 
 import com.andriawan.common.error.ErrorHandler
 import com.andriawan.domain.repository.GamesRepository
-import com.andriawan.domain.use_cases.*
+import com.andriawan.domain.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,5 +1,6 @@
 # Android Template
-Still working on it, please be patience
+This android template is can be used for new project that already setup some dependencies and also
+implemented clean architecture
 
 ### Tech Stacks
 

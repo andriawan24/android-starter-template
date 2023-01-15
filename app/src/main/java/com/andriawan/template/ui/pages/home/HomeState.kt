@@ -7,5 +7,5 @@ data class HomeState(
     var isLoading: Boolean = false,
     var errorMessage: String? = null,
     val currentPage: Int = 1,
-    val endReach: Boolean = false
+    val isBottomReached: Boolean = false
 )

@@ -38,7 +38,7 @@ class FavoriteViewModel @Inject constructor(
 
                     is Resource.Error -> {
                         state = state.copy(
-                            errMessage = it.errorMessage,
+                            errorMessage = it.errorMessage,
                             isLoading = false
                         )
                     }

@@ -47,7 +47,7 @@ fun FavoriteScreen(
         }
     }
 
-    if (state.errMessage == null) {
+    if (state.errorMessage == null) {
         MainFavoriteScreen(
             navHostController = navHostController,
             items = state.items,
@@ -60,7 +60,7 @@ fun FavoriteScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = state.errMessage,
+                text = state.errorMessage,
                 style = MaterialTheme.typography.h6
             )
         }

@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
                         uiState = uiState.copy(
                             list = uiState.list.orEmpty() + it.data.orEmpty(),
                             currentPage = uiState.currentPage + 1,
-                            endReach = it.data.isNullOrEmpty(),
+                            isBottomReached = it.data.isNullOrEmpty(),
                             isLoading = false
                         )
                     }
@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
 
     fun checkBottomScrolled(index: Int) {
         if (index == uiState.list.orEmpty().size - 1 &&
-            !uiState.list.isNullOrEmpty() && !uiState.endReach
+            !uiState.list.isNullOrEmpty() && !uiState.isBottomReached
         ) {
             getData()
         }
